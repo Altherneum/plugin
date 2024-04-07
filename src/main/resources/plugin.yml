@@ -1,0 +1,132 @@
+main: altherneum.fr.main.main
+name: plugin
+version: b1.0
+load: STARTUP
+api-version: 1.20
+description: "plugin"
+commands:
+  test:
+    description: "§2Commande de test"
+    usage: "/<command>"
+    aliases: [ debug ]
+    permission: admin
+  createworld:
+    description: "§2Crée et téléporte à un monde"
+    usage: "/<command> [NOM(String)]\n/<command> [NOM(String)] [Structure(Boolean)] [WorldEnvironment] [WorldType] [SkyBlock(Boolean)]"
+    aliases: [ world ]
+    permission: admin
+  unloadworld:
+    description: "§2Décharge un monde"
+    usage: "/<command> [NOM(String)]\n/<command> [NOM(String)] [Save(Boolean)]"
+    aliases: [ unload ]
+    permission: admin
+  deleteworld:
+    description: "§2Supprime un monde"
+    usage: "/<command> [NOM(String)]"
+    aliases: [ delete ]
+    permission: admin
+  setspawn:
+    description: "§2Place le point de spawn d'un monde"
+    usage: "/<command> [NOM(String)]\n/<command> [NOM(String)] <x(Int)> <y(Int)> <z(Int)>\n/<command> [NOM(String)] <x(Int)> <y(Int)> <z(Int)> <yaw(Int)> <pitch(Int)>"
+    aliases: [ locate, setlocation, spawnpoint ]
+    permission: admin
+  bonus:
+    description: "§2Ajoute / retire un bonus"
+    usage: "/<command> [NOM(String)] [REMOVE(String)] [BONUS~]\n/<command> [NOM(String)] [ADD(String)] [BONUS~] [DAYS(Int)]"
+    aliases: [ perks, shopbonus ]
+    permission: admin
+  tag:
+    description: "§2Ajoute / retire un tag"
+    usage: "/<command> [NOM(String)] [REMOVE(String)] [TAG~]\n/<command> [NOM(String)] [ADD(String)] [TAG~]"
+    aliases: [ tags ]
+    permission: admin
+  security:
+    description: "§2Ajoute / retire une sécurité"
+    usage: "/<command> [NOM(String)] [REMOVE(String)] [SECURITE~]\n/<command> [NOM(String)] [ADD(String)] [SECURITE~] [DAYS(Int)]"
+    aliases: [ securité, securite, securitys ]
+    permission: admin
+  removeplayerattribute:
+    description: "§2retire les attributs du joueur"
+    usage: "/<command> [NOM(String)]"
+    aliases: [ removeattribute, removeattributes, attributes, removeplayerattributes ]
+    permission: admin
+  npc:
+    description: "§2Crée un PNJ"
+    usage: "/<command> [IA(Boolean)] [PROFESSION~] [TYPE~] [NOM(String)]"
+    aliases: [ pnj,villager ]
+    permission: admin
+  armorstand:
+    description: "§2Crée un armorStand de texte"
+    usage: "/<command> [NOM(String)]"
+    aliases: [ text, hologram, texte, hologramme ]
+    permission: admin
+  setspawner:
+    description: "§2Crée un spawner à monstres"
+    usage: "/<command> [EntityType~] [SpawnCount(Int)] [MaxNearby(Int)] [PlayerRange(Int)] [SpawnRange(Int)] [MinSecDelay(Int)] [MaxSecDelay(Int)]"
+    aliases: [ spawner, monsterspawner ]
+    permission: admin
+  structureset:
+    description: "§2Place une structure"
+    usage: "/<command> [NOM(String)] <x(Int)> <y(Int)> <z(Int)> <waitTime(Int)>\n/<command> [NOM(String)]"
+    aliases: [ setstructure ]
+    permission: admin
+  structuresave:
+    description: "§2Sauvegarde une structure"
+    usage: "/<command> <x(Int)> <y(Int)> <z(Int)> <x2(Int)> <y2(Int)> <z2(Int)> [NOM(String)]"
+    aliases: [ savestructure ]
+    permission: admin
+  structurelocate:
+    description: "§2Déplace une structure"
+    usage: "/<command> [NOM(String)] <x(Int)> <y(Int)> <z(Int)>"
+    aliases: [ locatestructure, relocatestructure ]
+    permission: admin
+  settag:
+    description: "§2Donne un tag à une entitée"
+    usage: "/<command> [EntityTag~]"
+    aliases: [ persistententitytag, entitytag ]
+    permission: admin
+  summon:
+    description: "§2Crée un PNJ"
+    usage: "/<command> [IA(Boolean)] [EntityType~] [NOM(String)]"
+    aliases: [ summonNPC, summonCustomPNJ ]
+    permission: admin
+  spawn:
+    description: "§2Téléporte au spawn"
+    usage: "/<command>"
+    aliases: [ s ]
+  help:
+    description: "§2Commande d'aide"
+    usage: "/<command>"
+    aliases: [ aide ]
+  island:
+    description: "§2Commande d'île"
+    usage: "/<command> [Options(String)]\n/<command> [Options(String)] [NOM(String)]"
+    aliases: [ ile, is, island ]
+  profil:
+    description: "§2Affiche le profil du joueur"
+    usage: "/<command> [NOM(String)]"
+    aliases: [ info, data, player ]
+  money:
+    description: "§2Affiche les golds du joueur"
+    usage: "/<command>\n/<command> [NOM(String)]"
+    aliases: [ argent, purse, bal, balance ]
+  pay:
+    description: "§2Envoie des golds au joueur"
+    usage: "/<command> [NOM(String)] [ARGENT(Int)]"
+    aliases: [ paye, goldgive, givegold, don ]
+  shopsell:
+    description: "§2Vend l'inventaire du joueur"
+    usage: "/<command>"
+    aliases: [ toutvendre, vendretout, allsell, sellall ]
+  menu:
+    description: "§2Menu"
+    usage: "/<command>\n/<command> [Options(String)]"
+    aliases: [ compass, compas, menus ]
+  commandes:
+    description: "§2Liste des commandes"
+    usage: "/<command>"
+    aliases: [ commands, commande, command ]
+permissions:
+  admin:
+    description: "§2Commandes Administrateur"
+    default: op
