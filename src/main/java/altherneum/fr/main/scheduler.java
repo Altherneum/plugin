@@ -100,7 +100,7 @@ public class scheduler {
         }
 
         if (BuildSpawn) {
-            structure.setStructure(structure.SpawnName(ServerBootFile.getServerTypeFromYML()), "Spawn", 1, 5);
+            structure.setStructure(structure.SpawnName(ServerBootFile.getServerTypeFromYML()), "Spawn", 20, 40);
             LastWorldsInit.LoadWorld();
         }
 
