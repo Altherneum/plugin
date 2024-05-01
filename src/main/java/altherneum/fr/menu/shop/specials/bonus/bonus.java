@@ -18,7 +18,7 @@ import java.util.List;
 
 public class bonus {
     public enum BonusList {
-        JoinQuitMessage, AuraTP, VIP, VIPPlus, PKAura, Repair, Replant, Fly, Compact, Weather, Tree, Hat, EnderChest
+        JoinQuitMessage, AuraTP, VIP, VIPPlus, Fly
     }
 
     public static File file(OfflinePlayer offlinePlayer) {
