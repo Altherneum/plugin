@@ -105,6 +105,7 @@ public class shopItemsList {
         materials.add(Material.DIAMOND);
         materials.add(Material.EMERALD);
         materials.add(Material.NETHERITE_SCRAP);
+        materials.add(Material.NETHERITE_INGOT);
         materials.add(Material.ANCIENT_DEBRIS);
         return materials;
     }

@@ -119,15 +119,17 @@ public class shopPrice {
             case RAW_GOLD:
                 return 900;
             case GOLD_INGOT:
-                return 1000;
+                return 1_000;
             case DIAMOND:
-                return 5000;
+                return 5_000;
             case EMERALD:
-                return 2500;
+                return 2_500;
             case NETHERITE_SCRAP:
-                return 25000;
+                return 25_000;
+            case NETHERITE_INGOT:
+                return 100_000;
             case ANCIENT_DEBRIS:
-                return 24900;
+                return 24_900;
             // Monstres
             case HONEY_BOTTLE:
                 return 200;
