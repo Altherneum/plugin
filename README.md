@@ -10,6 +10,7 @@ Server side plugin with Spigot / PaperMC & Javacord
 <a href=""><img src="https://img.shields.io/github/languages/code-size/Altherneum/plugin?color=red"></a>
 <a href=""><img src="https://img.shields.io/github/repo-size/Altherneum/plugin?color=red"></a>
 
+- [Repository](https://github.com/Altherneum/plugin)
 - [Tableau](https://github.com/orgs/Altherneum/projects/3/)
 - [Issues](https://github.com/Altherneum/plugin/issues)
 - [Commits](https://github.com/Altherneum/plugin/commits/main)
