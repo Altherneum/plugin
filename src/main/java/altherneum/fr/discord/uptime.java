@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -51,12 +53,30 @@ public class uptime {
         long free = diskPartition.getFreeSpace();
         long total = diskPartition.getTotalSpace();
 
+        boolean alternativePing = true;
+
+        String adress1 = "www.google.fr";
+        boolean isPinged = false;
+        String adress2 = "www.discord.com";
+        boolean isPinged2 = false;
+        
+        int port = 80;
+        int timeout = 2000;
+
         long currentTime = System.currentTimeMillis();
-        boolean isPinged = InetAddress.getByName("www.google.fr").isReachable(2000);
+        if (alternativePing) {
+            isPinged = connectSocket(adress1, port, timeout);
+        } else {
+            isPinged = InetAddress.getByName(adress1).isReachable(timeout);
+        }
         currentTime = System.currentTimeMillis() - currentTime;
 
         long currentTime2 = System.currentTimeMillis();
-        boolean isPinged2 = InetAddress.getByName("www.discord.com").isReachable(2000);
+        if (alternativePing) {
+            isPinged2 = InetAddress.getByName(adress2).isReachable(timeout);
+        } else {
+            isPinged2 = connectSocket(adress2, port, timeout);
+        }
         currentTime2 = System.currentTimeMillis() - currentTime2;
 
         String message = "";
@@ -74,18 +94,31 @@ public class uptime {
                 + Math.round(total / 1024 / 1024 / 1024) + " Go";
 
         if (isPinged) {
-            message += "\n\n**__Ping__** google.fr : " + currentTime + " Ms";
+            message += "\n\n**__Ping__** " + adress1 + " : " + currentTime + " Ms";
         } else {
             message += "\n\n**__Ping__** : __Erreur__";
         }
 
         if (isPinged2) {
-            message += "\n**__Ping__** discord.com : " + currentTime2 + " Ms";
+            message += "\n**__Ping__** " + adress2 + " : " + currentTime2 + " Ms";
         } else {
             message += "\n**__Ping__** : __Erreur__";
         }
 
         sendDiscordUptime(message);
+    }
+    
+    public static boolean connectSocket(String address, int port, int timeout) throws IOException {
+        Socket socket = new Socket();
+        try {
+            socket.connect(new InetSocketAddress(address, port), timeout);
+            return true;
+        } catch (IOException exception) {
+            exception.printStackTrace();
+            return false;
+        } finally {
+            socket.close();
+        }
     }
 
     public static void sendDiscordUptime(String text) throws InterruptedException, ExecutionException {
