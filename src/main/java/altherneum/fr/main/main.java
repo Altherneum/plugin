@@ -96,7 +96,7 @@ public class main extends JavaPlugin implements PluginMessageListener {
         }
         Bukkit.getPluginManager().registerEvents(new eventsMinecraft(), this);
         registerEvents();
-        registerEnchant();
+        //registerEnchant(); // to debug it crash due to already been registered
         registerCommands();
         lib.hook();
         scheduler.start();
