@@ -55,9 +55,9 @@ public class uptime {
 
         boolean alternativePing = true;
 
-        String adress1 = "www.google.fr";
+        String adress1 = "google.fr";
         boolean isPinged = false;
-        String adress2 = "www.discord.com";
+        String adress2 = "discord.com";
         boolean isPinged2 = false;
         
         int port = 80;
