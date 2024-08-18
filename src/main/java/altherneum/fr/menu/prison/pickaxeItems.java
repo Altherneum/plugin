@@ -48,7 +48,7 @@ public class pickaxeItems {
     public static ItemStack ItemStackPickaxeEnchantLooting(lang.languages lang, Player player) throws IOException {
         ItemStack is = new ItemStack(Material.ENCHANTED_BOOK);
         ItemMeta meta = is.getItemMeta();
-        Enchantment enchant = Enchantment.LOOT_BONUS_BLOCKS;
+        Enchantment enchant = Enchantment.FORTUNE;
         meta.setDisplayName(itemsTranslation.PickaxeEnchantTitle(lang, enchant));
         meta.setLore(itemsTranslation.PickaxeEnchantLore(lang, player, enchant));
         is.setItemMeta(meta);
@@ -64,7 +64,7 @@ public class pickaxeItems {
     public static ItemStack ItemStackPickaxeEnchantDigSpeed(lang.languages lang, Player player) throws IOException {
         ItemStack is = new ItemStack(Material.ENCHANTED_BOOK);
         ItemMeta meta = is.getItemMeta();
-        Enchantment enchant = Enchantment.DIG_SPEED;
+        Enchantment enchant = Enchantment.EFFICIENCY;
         meta.setDisplayName(itemsTranslation.PickaxeEnchantTitle(lang, enchant));
         meta.setLore(itemsTranslation.PickaxeEnchantLore(lang, player, enchant));
         is.setItemMeta(meta);

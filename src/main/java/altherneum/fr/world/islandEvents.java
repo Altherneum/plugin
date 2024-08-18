@@ -137,7 +137,7 @@ public class islandEvents implements Listener {
                 }
 
                 if (CoinFlip() && lvl >= 50) {
-                    e.getBlock().getWorld().spawnParticle(Particle.CRIT_MAGIC, e.getBlock().getLocation(), 200);
+                    e.getBlock().getWorld().spawnParticle(Particle.CRIT, e.getBlock().getLocation(), 200);
                     e.getBlock().getWorld().playSound(e.getBlock().getLocation(), Sound.BLOCK_ANVIL_PLACE, 0.5F, 5);
 
                     if (CoinFlip()) {
@@ -156,14 +156,14 @@ public class islandEvents implements Listener {
 
                         if (CoinFlip() && lvl >= 250) {
                             e.getNewState().setType(Material.EMERALD_ORE);
-                            e.getBlock().getWorld().spawnParticle(Particle.CRIT_MAGIC,
+                            e.getBlock().getWorld().spawnParticle(Particle.CRIT,
                                     e.getBlock().getLocation(), 200);
                             e.getBlock().getWorld().playSound(e.getBlock().getLocation(),
                                     Sound.ITEM_TOTEM_USE, 1F, 0);
 
                             if (CoinFlip() && lvl >= 500) {
                                 e.getNewState().setType(Material.DIAMOND_ORE);
-                                e.getBlock().getWorld().spawnParticle(Particle.CRIT_MAGIC,
+                                e.getBlock().getWorld().spawnParticle(Particle.CRIT,
                                         e.getBlock().getLocation(), 200);
                                 e.getBlock().getWorld().playSound(e.getBlock().getLocation(),
                                         Sound.ENTITY_PLAYER_LEVELUP, 1.5F, 0);

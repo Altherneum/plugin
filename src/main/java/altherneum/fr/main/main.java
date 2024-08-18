@@ -122,7 +122,7 @@ public class main extends JavaPlugin implements PluginMessageListener {
         hashed = HexFormat.of().parseHex(sha1);
     }
 
-    public static void registerEnchantment(Enchantment enchantment) {
+    /* public static void registerEnchantment(Enchantment enchantment) {
         boolean registered = true;
         try {
             Field f = Enchantment.class.getDeclaredField("acceptingNew");
@@ -136,7 +136,7 @@ public class main extends JavaPlugin implements PluginMessageListener {
         if (registered) {
             // It's been registered!
         }
-    }
+    } */
 
     @Override
     public void onDisable() {
@@ -230,11 +230,11 @@ public class main extends JavaPlugin implements PluginMessageListener {
     // public static final Enchantment INSTANTMINE = new instantmine(new
     // NamespacedKey(this, "instantmine"));
 
-    public void registerEnchant() {
+    /* public void registerEnchant() {
         instantmine instantmine = new instantmine("instantmine");
         registerEnchantment(instantmine);
         Bukkit.getPluginManager().registerEvents(instantmine, this);
-    }
+    } */
 
     public void registerCommands() {
         registerAdminCommands();

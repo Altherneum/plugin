@@ -64,7 +64,7 @@ public class shopItemsList {
         materials.add(Material.HONEYCOMB);
         materials.add(Material.PUFFERFISH);
         materials.add(Material.TURTLE_EGG);
-        materials.add(Material.SCUTE);
+        materials.add(Material.TURTLE_SCUTE);
         materials.add(Material.NAUTILUS_SHELL);
         materials.add(Material.PRISMARINE_SHARD);
         materials.add(Material.PRISMARINE_CRYSTALS);

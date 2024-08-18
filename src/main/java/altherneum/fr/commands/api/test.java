@@ -36,12 +36,12 @@ public class test implements CommandExecutor, TabCompleter {
             if (isAdmin.isAdmin(sender)) {
                 Player player = (Player) sender;
                 Plugin plugin = JavaPlugin.getPlugin(main.class);
-                instantmine instantmine = new instantmine("instantmine");
+                /* instantmine instantmine = new instantmine("instantmine");
                 player.getItemInHand().addUnsafeEnchantment(instantmine, 0);
                 player.sendMessage("OK");
                 for (Enchantment enchant : player.getItemInHand().getEnchantments().keySet()) {
                     player.sendMessage("enchant : " + enchant.getName());
-                }
+                } */
             }
             return true;
         } catch (Exception e) {

@@ -38,7 +38,7 @@ public class teleportationAura implements Listener {
                 @Override
                 public void run() {
                     Location location = player.getLocation();
-                    Firework firework = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
+                    Firework firework = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK_ROCKET);
                     FireworkMeta fireWorkMeta = firework.getFireworkMeta();
 
                     fireWorkMeta.setPower(0);

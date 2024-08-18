@@ -92,11 +92,11 @@ public class pickaxe {
     }
 
     public static altherneum.fr.menu.api.persistentData.customKey enchantKey(Enchantment enchantment) {
-        if (enchantment.equals(Enchantment.LOOT_BONUS_BLOCKS)) {
+        if (enchantment.equals(Enchantment.FORTUNE)) {
             return altherneum.fr.menu.api.persistentData.customKey.pickaxeenchantlooting;
         }
         
-        if (enchantment.equals(Enchantment.DIG_SPEED)) {
+        if (enchantment.equals(Enchantment.EFFICIENCY)) {
             return altherneum.fr.menu.api.persistentData.customKey.pickaxeenchantspeed;
         }
         return null;

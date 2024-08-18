@@ -139,7 +139,7 @@ public class shopPrice {
                 return 10;
             case MAGMA_CREAM:
                 return 250;
-            case SCUTE:
+            case TURTLE_SCUTE:
                 return 150;
             case ARROW:
                 return 10;

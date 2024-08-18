@@ -5,18 +5,23 @@ import java.util.Set;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.EntityCategory;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ItemType;
 import org.bukkit.NamespacedKey;
 
 import io.papermc.paper.enchantments.EnchantmentRarity;
+import io.papermc.paper.registry.set.RegistryKeySet;
 import net.kyori.adventure.text.Component;
 
-public class instantmine extends Enchantment implements Listener {
+public class instantmine /*extends Enchantment implements Listener*/ {
 
+    /*  
     @EventHandler
     public void onEnchantUse(BlockBreakEvent e) {
         ItemStack it = e.getPlayer().getInventory().getItemInMainHand();
@@ -25,21 +30,21 @@ public class instantmine extends Enchantment implements Listener {
             for (ItemStack is : e.getBlock().getDrops(it, e.getPlayer())) {
                 e.getPlayer().getInventory().addItem(is);
             }
-
+    
             e.getPlayer().giveExp(e.getExpToDrop());
             e.setExpToDrop(0);
         }
     }
-
+    
     public instantmine(String namespace) {
         super(NamespacedKey.minecraft(namespace));
     }
-
-    /*
-     * public instantmine(NamespacedKey key) {
-     * super(key);
-     * }
-     */
+    
+    
+    //  public instantmine(NamespacedKey key) {
+    //  super(key);
+    //  }
+     
 
     @Override
     public NamespacedKey getKey() {
@@ -130,4 +135,50 @@ public class instantmine extends Enchantment implements Listener {
     public int getMinModifiedCost(int i) {
         return 0;
     }
+
+    @Override
+    public String getTranslationKey() {
+        throw new UnsupportedOperationException("Unimplemented method 'getTranslationKey'");
+    }
+
+    @Override
+    public Component description() {
+        throw new UnsupportedOperationException("Unimplemented method 'description'");
+    }
+
+    @Override
+    public Set<EquipmentSlotGroup> getActiveSlotGroups() {
+        throw new UnsupportedOperationException("Unimplemented method 'getActiveSlotGroups'");
+    }
+
+    @Override
+    public int getAnvilCost() {
+        throw new UnsupportedOperationException("Unimplemented method 'getAnvilCost'");
+    }
+
+    @Override
+    public float getDamageIncrease(int arg0, EntityType arg1) {
+        throw new UnsupportedOperationException("Unimplemented method 'getDamageIncrease'");
+    }
+
+    @Override
+    public RegistryKeySet<Enchantment> getExclusiveWith() {
+        throw new UnsupportedOperationException("Unimplemented method 'getExclusiveWith'");
+    }
+
+    @Override
+    public  RegistryKeySet<ItemType> getPrimaryItems() {
+        throw new UnsupportedOperationException("Unimplemented method 'getPrimaryItems'");
+    }
+
+    @Override
+    public RegistryKeySet<ItemType> getSupportedItems() {
+        throw new UnsupportedOperationException("Unimplemented method 'getSupportedItems'");
+    }
+
+    @Override
+    public int getWeight() {
+        throw new UnsupportedOperationException("Unimplemented method 'getWeight'");
+    }
+    */
 }

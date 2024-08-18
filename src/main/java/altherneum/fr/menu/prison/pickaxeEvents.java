@@ -72,11 +72,11 @@ public class pickaxeEvents implements Listener {
                 int prix = Integer.MAX_VALUE;
                 if (persistentData.hasPersistentDataItemStack(e.getCurrentItem(), customKey.pickaxeenchantspeed)) {
                     prix = pickaxe.enchantPrice(customKey.pickaxeenchantspeed,
-                            prisonData.getEnchantLvl(player, Enchantment.DIG_SPEED));
+                            prisonData.getEnchantLvl(player, Enchantment.EFFICIENCY));
                 } else if (persistentData.hasPersistentDataItemStack(e.getCurrentItem(),
                         customKey.pickaxeenchantlooting)) {
                     prix = pickaxe.enchantPrice(customKey.pickaxeenchantlooting,
-                            prisonData.getEnchantLvl(player, Enchantment.LOOT_BONUS_BLOCKS));
+                            prisonData.getEnchantLvl(player, Enchantment.FORTUNE));
                 }
 
                 if (gold.GetHasEnoughGold(player, prix)) {
