@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -66,6 +67,10 @@ public class serverSelectorItems {
         list.addAll(itemsTranslation.CreatifLoreInfo(lang));
         list.addAll(StringToAdd(player, lang, "creatif"));
         meta.setLore(list);
+        
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+
         is.setItemMeta(meta);
         persistentData.setPersistentDataItemStack(is, persistentData.customKey.custom);
         if (tags.hasTags(player, tags.TagsList.Creatif)) {
@@ -166,6 +171,10 @@ public class serverSelectorItems {
         }
         list.addAll(itemsTranslation.SurvieLoreInfo(lang));
         list.addAll(StringToAdd(player, lang, "survie"));
+        
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+
         meta.setLore(list);
         is.setItemMeta(meta);
         persistentData.setPersistentDataItemStack(is, persistentData.customKey.custom);
@@ -194,6 +203,10 @@ public class serverSelectorItems {
         list.addAll(itemsTranslation.OPPrisonLoreInfo(lang));
         list.addAll(StringToAdd(player, lang, "opprison"));
         meta.setLore(list);
+        
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+
         is.setItemMeta(meta);
         persistentData.setPersistentDataItemStack(is, persistentData.customKey.custom);
         if (tags.hasTags(player, tags.TagsList.Test)) {
