@@ -3,6 +3,7 @@ package altherneum.fr.system;
 import com.sun.management.OperatingSystemMXBean;
 
 import altherneum.fr.chat.prefixTag;
+import altherneum.fr.discord.uptime;
 import altherneum.fr.main.main;
 import altherneum.fr.text.textTranslation;
 
@@ -58,7 +59,7 @@ public class Tab {
                 long currentTime = System.currentTimeMillis();
                 try {
                     if (alternativePing) {
-                        isPinged = connectSocket(adress1, port, timeout);
+                        isPinged = uptime.connectSocket(adress1, port, timeout);
                     } else {
                         isPinged = InetAddress.getByName(adress1).isReachable(timeout);
                     }
