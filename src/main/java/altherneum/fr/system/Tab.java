@@ -47,10 +47,21 @@ public class Tab {
                 long free = diskPartition.getFreeSpace();
                 long total = diskPartition.getTotalSpace();
 
-                long currentTime = System.currentTimeMillis();
+                boolean alternativePing = true;
+
+                String adress1 = "google.fr";
                 boolean isPinged = false;
+
+                int port = 80;
+                int timeout = 2000;
+
+                long currentTime = System.currentTimeMillis();
                 try {
-                    isPinged = InetAddress.getByName("www.google.fr").isReachable(2000);
+                    if (alternativePing) {
+                        isPinged = connectSocket(adress1, port, timeout);
+                    } else {
+                        isPinged = InetAddress.getByName(adress1).isReachable(timeout);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
