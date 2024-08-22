@@ -1,12 +1,19 @@
 package altherneum.fr.menu.serverSelector;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 
 import altherneum.fr.menu.api.persistentData;
 import altherneum.fr.system.dateAPI;
@@ -67,6 +74,11 @@ public class serverSelectorItems {
         list.addAll(itemsTranslation.CreatifLoreInfo(lang));
         list.addAll(StringToAdd(player, lang, "creatif"));
         meta.setLore(list);
+
+        Plugin plugin = Bukkit.getPluginManager().getPlugin("plugin");
+        NamespacedKey key = new NamespacedKey(plugin, "AttributeHider");
+        meta.addAttributeModifier(Attribute.GENERIC_ARMOR,
+                new AttributeModifier(key, 0.0, Operation.ADD_NUMBER, EquipmentSlotGroup.ANY));
         
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
@@ -173,6 +185,11 @@ public class serverSelectorItems {
         list.addAll(itemsTranslation.SurvieLoreInfo(lang));
         list.addAll(StringToAdd(player, lang, "survie"));
         
+        Plugin plugin = Bukkit.getPluginManager().getPlugin("plugin");
+        NamespacedKey key = new NamespacedKey(plugin, "AttributeHider");
+        meta.addAttributeModifier(Attribute.GENERIC_ARMOR,
+                new AttributeModifier(key, 0.0, Operation.ADD_NUMBER, EquipmentSlotGroup.ANY));
+
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         meta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
@@ -206,6 +223,11 @@ public class serverSelectorItems {
         list.addAll(StringToAdd(player, lang, "opprison"));
         meta.setLore(list);
         
+        Plugin plugin = Bukkit.getPluginManager().getPlugin("plugin");
+        NamespacedKey key = new NamespacedKey(plugin, "AttributeHider");
+        meta.addAttributeModifier(Attribute.GENERIC_ARMOR,
+                new AttributeModifier(key, 0.0, Operation.ADD_NUMBER, EquipmentSlotGroup.ANY));
+
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         meta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
