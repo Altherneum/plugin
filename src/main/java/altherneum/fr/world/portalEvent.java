@@ -23,8 +23,10 @@ public class portalEvent implements Listener {
     @EventHandler
     public void onPlayerTeleport(PlayerPortalEvent e) throws IOException, ParseException {
         Player player = e.getPlayer();
+        player.sendMessage("trigger");
         if (ServerBootFile.getServerType().equals(ServerBootFile.serverType.Survie)|| ServerBootFile.getServerType().equals(ServerBootFile.serverType.Anarchie)) {
 
+            player.sendMessage("trigger 2");
             Location to = e.getTo();
             Location from = e.getFrom();
 

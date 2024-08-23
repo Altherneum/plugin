@@ -59,8 +59,10 @@ public class islandEvents implements Listener {
     @EventHandler
     public void onPlayerTeleport(PlayerPortalEvent e) throws IOException, ParseException {
         Player player = e.getPlayer();
+        player.sendMessage("trigger");
         if (player.getWorld().getName().startsWith("i.")) {
 
+            player.sendMessage("trigger 2");
             Location to = e.getTo();
             Location from = e.getFrom();
 
@@ -90,9 +92,7 @@ public class islandEvents implements Listener {
                         gradesMenu.openGradeShop(player);
                     }
                 }
-            }
-
-            else if (player.getWorld().getEnvironment().equals(World.Environment.NETHER)) {
+            } else if (player.getWorld().getEnvironment().equals(World.Environment.NETHER)) {
                 if (e.getCause().equals(PlayerTeleportEvent.TeleportCause.NETHER_PORTAL)) {
                     worldManager.Generate(from.getWorld().getName().replace("_nether", ""), true,
                             World.Environment.NORMAL, WorldType.NORMAL, true);
