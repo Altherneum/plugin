@@ -31,7 +31,8 @@ public class entityGriefing implements Listener {
 
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent e) {
-        if (ServerBootFile.serverTypeActual.equals(ServerBootFile.serverType.Survie)) {
+        if (ServerBootFile.serverTypeActual.equals(ServerBootFile.serverType.Survie) || ServerBootFile.serverTypeActual
+                .equals(ServerBootFile.serverType.Anarchie)) {
             if (e.getEntity().getWorld().getEnvironment().equals(World.Environment.NETHER)) {
                 if (e.getEntityType().equals(EntityType.TNT)
                         || e.getEntityType().equals(EntityType.TNT_MINECART)) {
