@@ -79,6 +79,10 @@ public class itemsTranslation {
         return "§6Monde principal";
     }
 
+    public static String mainBedTitle() {
+        return "§6Lit";
+    }
+
     public static ArrayList<String> mainWorldLore(lang.languages languages) {
         ArrayList<String> Lore = new ArrayList<String>();
         String commande = "/§6World (ToDo)";

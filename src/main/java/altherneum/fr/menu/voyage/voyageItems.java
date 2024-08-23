@@ -36,7 +36,7 @@ public class voyageItems {
     public static ItemStack ItemStackBed(lang.languages lang) {
         ItemStack is = new ItemStack(Material.RED_BED);
         ItemMeta meta = is.getItemMeta();
-        meta.setDisplayName(itemsTranslation.mainWorldTitle());
+        meta.setDisplayName(itemsTranslation.mainBedTitle());
         meta.setLore(itemsTranslation.mainBedLore(lang));
         is.setItemMeta(meta);
         persistentData.setPersistentDataItemStack(is, persistentData.customKey.custom);
