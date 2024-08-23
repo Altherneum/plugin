@@ -85,13 +85,34 @@ public class itemsTranslation {
         switch (languages) {
             case fr:
                 Lore.add("");
-                Lore.add("§fTéléportez §7vous au §fonde principal");
+                Lore.add("§fTéléportez §7vous au §fmonde principal");
                 Lore.add("§fCommande§7 : " + commande);
                 Lore.add("");
                 return Lore;
             case en:
                 Lore.add("");
                 Lore.add("§fTeleport §7to the §fmain world");
+                Lore.add("§fCommand§7 : " + commande);
+                Lore.add("");
+                return Lore;
+            default:
+                return Lore;
+        }
+    }
+
+    public static ArrayList<String> mainBedLore(lang.languages languages) {
+        ArrayList<String> Lore = new ArrayList<String>();
+        String commande = "/§6Bed (ToDo)";
+        switch (languages) {
+            case fr:
+                Lore.add("");
+                Lore.add("§fTéléportez §7vous à votre §flit");
+                Lore.add("§fCommande§7 : " + commande);
+                Lore.add("");
+                return Lore;
+            case en:
+                Lore.add("");
+                Lore.add("§fTeleport §7to your §fbed");
                 Lore.add("§fCommand§7 : " + commande);
                 Lore.add("");
                 return Lore;
