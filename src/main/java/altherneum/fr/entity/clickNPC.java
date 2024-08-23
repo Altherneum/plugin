@@ -65,11 +65,11 @@ public class clickNPC implements Listener {
         pickaxeMenu.pickaxeMenu(player);
     }
 
-    public void tpWorld(Player player) throws IOException, ParseException {
+    public static void tpWorld(Player player) throws IOException, ParseException {
         teleportation.Teleport(player, "world", false, true, Environment.NORMAL, WorldType.NORMAL, false);
     }
 
-    public void tpBed(Player player) throws IOException, ParseException {
+    public static void tpBed(Player player) throws IOException, ParseException {
         boolean canTP = false;
         boolean obstruct = false;
 

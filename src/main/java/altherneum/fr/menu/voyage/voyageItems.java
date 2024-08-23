@@ -32,4 +32,16 @@ public class voyageItems {
         persistentData.setPersistentDataItemStack(is, persistentData.customKey.locked);
         return is;
     }
+
+    public static ItemStack ItemStackBed(lang.languages lang) {
+        ItemStack is = new ItemStack(Material.RED_BED);
+        ItemMeta meta = is.getItemMeta();
+        meta.setDisplayName(itemsTranslation.mainWorldTitle());
+        meta.setLore(itemsTranslation.mainWorldLore(lang));
+        is.setItemMeta(meta);
+        persistentData.setPersistentDataItemStack(is, persistentData.customKey.custom);
+        persistentData.setPersistentDataItemStack(is, persistentData.customKey.bed);
+        persistentData.setPersistentDataItemStack(is, persistentData.customKey.locked);
+        return is;
+    }
 }
