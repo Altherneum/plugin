@@ -43,6 +43,7 @@ import altherneum.fr.system.BossBarMessage;
 import altherneum.fr.system.BungeePluginMessageListener;
 import altherneum.fr.system.MOTD;
 import altherneum.fr.system.ServerBootFile;
+import altherneum.fr.world.portalEvent;
 import altherneum.fr.world.api.BuildRules;
 import altherneum.fr.world.api.entityGriefing;
 import altherneum.fr.world.api.fire;
@@ -225,6 +226,7 @@ public class main extends JavaPlugin implements PluginMessageListener {
         Bukkit.getPluginManager().registerEvents(new EventLimiter(), this);
         Bukkit.getPluginManager().registerEvents(new gradesMenuEvent(), this);
         Bukkit.getPluginManager().registerEvents(new anarchieLife(), this);
+        Bukkit.getPluginManager().registerEvents(new portalEvent(), this);
     }
 
     // public static final Enchantment INSTANTMINE = new instantmine(new
