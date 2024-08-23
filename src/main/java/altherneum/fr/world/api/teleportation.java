@@ -1,6 +1,7 @@
 package altherneum.fr.world.api;
 
 import org.bukkit.*;
+import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -18,19 +19,27 @@ import java.text.ParseException;
 import java.util.concurrent.CompletableFuture;
 
 public class teleportation {
+
+
     public static void Teleport(Player player, String world, Boolean sync) throws IOException, ParseException {
-        if (Bukkit.getWorld(world) == null) {
-            worldManager.Generate(world, false, World.Environment.NORMAL, WorldType.NORMAL, true);
-        }
-        Location spawn = Bukkit.getWorld(world).getSpawnLocation();
-        spawn.set(spawn.getX() + 0.5, spawn.getY() + 0.5, spawn.getZ() + 0.5);
-        Teleport(player, world, sync, spawn);
+        Teleport(player, world, sync, false, Environment.NORMAL, WorldType.NORMAL, true);
     }
 
-    public static void Teleport(Player player, String world, Boolean sync, Location location)
-            throws IOException, ParseException {
+    public static void Teleport(Player player, String world, Boolean sync, Boolean structure, Environment environment, WorldType worldType, Boolean skyBlock) throws IOException, ParseException {
+        Location spawn = Bukkit.getWorld(world).getSpawnLocation();
+        spawn.set(spawn.getX() + 0.5, spawn.getY() + 0.5, spawn.getZ() + 0.5);
+        
+        Teleport(player, world, sync, spawn, structure, environment, worldType, skyBlock);
+    }
+
+
+    public static void Teleport(Player player, String world, Boolean sync, Location location) throws IOException, ParseException {
+        Teleport(player, world, sync, location, false, Environment.NORMAL, WorldType.NORMAL, true);
+    }
+    
+    public static void Teleport(Player player, String world, Boolean sync, Location location, Boolean structure, Environment environment, WorldType worldType, Boolean skyBlock) throws IOException, ParseException {
         if (Bukkit.getWorld(world) == null) {
-            worldManager.Generate(world, false, World.Environment.NORMAL, WorldType.NORMAL, true);
+            worldManager.Generate(world, structure, environment, worldType, skyBlock);
         }
         
         CompletableFuture<Boolean> tp = null;

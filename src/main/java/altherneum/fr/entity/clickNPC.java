@@ -1,5 +1,7 @@
 package altherneum.fr.entity;
 
+import org.bukkit.WorldType;
+import org.bukkit.World.Environment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -64,7 +66,7 @@ public class clickNPC implements Listener {
     }
 
     public void tpWorld(Player player) throws IOException, ParseException {
-        teleportation.Teleport(player, "world", false);
+        teleportation.Teleport(player, "world", false, true, Environment.NORMAL, WorldType.NORMAL, false);
     }
 
     public void tpBed(Player player) throws IOException, ParseException {
@@ -86,7 +88,7 @@ public class clickNPC implements Listener {
             if (obstruct) {
                 player.sendMessage(textTranslation.bedObstrued(lang));
             } else {
-                teleportation.Teleport(player, "world", false, player.getBedSpawnLocation());
+                teleportation.Teleport(player, "world", false, player.getBedSpawnLocation(), true, Environment.NORMAL, WorldType.NORMAL, false);
             }
         }
     }
