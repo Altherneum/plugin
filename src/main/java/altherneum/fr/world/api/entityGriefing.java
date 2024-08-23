@@ -39,6 +39,14 @@ public class entityGriefing implements Listener {
                     return;
                 }
             }
+            else {
+                if (ServerBootFile.serverTypeActual.equals(ServerBootFile.serverType.Anarchie)) {
+                    if (e.getEntityType().equals(EntityType.TNT)
+                            || e.getEntityType().equals(EntityType.TNT_MINECART)) {
+                        return;
+                    }
+                }
+            }
         }
         e.blockList().clear();
     }
