@@ -31,8 +31,7 @@ public class entityGriefing implements Listener {
 
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent e) {
-        if (ServerBootFile.serverTypeActual.equals(ServerBootFile.serverType.Survie)
-                || ServerBootFile.serverTypeActual.equals(ServerBootFile.serverType.Anarchie)) {
+        if (ServerBootFile.serverTypeActual.equals(ServerBootFile.serverType.Survie)) {
             if (e.getEntity().getWorld().getEnvironment().equals(World.Environment.NETHER)) {
                 if (e.getEntityType().equals(EntityType.TNT)
                         || e.getEntityType().equals(EntityType.TNT_MINECART)) {
@@ -46,7 +45,8 @@ public class entityGriefing implements Listener {
     @EventHandler
     public void onEntityPickupItem(EntityPickupItemEvent e) {
         if (!e.getEntityType().equals(EntityType.PLAYER) && !e.getEntityType().equals(EntityType.FOX)
-                && !e.getEntityType().equals(EntityType.VILLAGER)) {
+                && !e.getEntityType().equals(EntityType.VILLAGER) && !e.getEntityType().equals(EntityType.PIGLIN)
+                && !e.getEntityType().equals(EntityType.PIGLIN_BRUTE) && !e.getEntityType().equals(EntityType.ALLAY)) {
             e.setCancelled(true);
         }
     }
