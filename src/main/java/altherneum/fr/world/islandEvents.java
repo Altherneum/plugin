@@ -59,10 +59,8 @@ public class islandEvents implements Listener {
     @EventHandler
     public void onPlayerTeleport(PlayerPortalEvent e) throws IOException, ParseException {
         Player player = e.getPlayer();
-        player.sendMessage("trigger");
         if (player.getWorld().getName().startsWith("i.")) {
 
-            player.sendMessage("trigger 2");
             Location to = e.getTo();
             Location from = e.getFrom();
 
