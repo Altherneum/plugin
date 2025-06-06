@@ -22,7 +22,6 @@ public class shopItemsList {
         materials.add(Material.PACKED_ICE);
         materials.add(Material.ICE);
         materials.add(Material.BLUE_ICE);
-        materials.add(Material.FROSTED_ICE);
         materials.add(Material.END_STONE);
         materials.add(Material.OAK_LOG);
         materials.add(Material.ACACIA_LOG);
