@@ -68,7 +68,7 @@ public class main extends JavaPlugin implements PluginMessageListener {
 
     private static final Logger logger = Bukkit.getLogger();
 
-    public static String url = "https://altherneum.fr/storage/zip/resourcePack.zip";
+    public static String url = "https://mc.altherneum.fr/storage/zip/resourcePack.zip";
     public static String sha1;
     public static byte[] hashed;
 
