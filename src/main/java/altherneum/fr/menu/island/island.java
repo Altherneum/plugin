@@ -404,6 +404,11 @@ public class island {
             throws IllegalArgumentException, IllegalStateException, IOException, ParseException {
         if (GetHasIsland(player)) {
             teleportation.Teleport(player, "i." + GetIslandNumber(player), false);
+            //Get Island World Spawn point
+                //Bukkit.getWorld("i." + GetIslandNumber(player))
+            //Check if block is not air or liquid
+            //check if block under is same
+            //else set block of cobblestone
         }
     }
 }
