@@ -1,5 +1,6 @@
 package altherneum.fr.enchantements;
 
+/*
 import java.util.Set;
 
 import org.bukkit.enchantments.Enchantment;

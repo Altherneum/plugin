@@ -39,7 +39,7 @@ public class eventsDiscord {
 
     public static TextComponent TextPlayerHover(MessageAuthor messageAuthor, Server server) throws IOException, ParseException {
         TextComponent PlayerComponent = new TextComponent();
-        PlayerComponent.setText("[ §r §6" + messageAuthor.getDisplayName() + " §r]");
+        PlayerComponent.setText("[ §r §6" + messageAuthor.displayName() + " §r]");
         String hover = "";
         hover = hover.concat("\n");
         hover = hover.concat("§6§lUUID§r: " + messageAuthor.getIdAsString());

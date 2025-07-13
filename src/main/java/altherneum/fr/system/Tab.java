@@ -123,7 +123,7 @@ public class Tab {
     }
 
     public static void setTabName(Player player) throws IOException, ParseException {
-        player.setPlayerListName(prefixTag.prefixTag(player) + "  " + player.getDisplayName() + "  " + df.format(player.getHealth()) + "");
+        player.setPlayerListName(prefixTag.prefixTag(player) + "  " + player.displayName() + "  " + df.format(player.getHealth()) + "");
     }
 
     @SuppressWarnings("deprecation")

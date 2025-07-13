@@ -101,6 +101,8 @@ public class bonusPlayerFile {
             case bonustickspeed:
                 world.setGameRule(GameRule.RANDOM_TICK_SPEED,
                         3 + (getLvlIsland(offlinePlayer, persistentData.customKey.bonustickspeed) / 10));
+            default:
+                break;
         }
     }
 }
