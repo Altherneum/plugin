@@ -19,6 +19,7 @@ import org.bukkit.NamespacedKey;
 import io.papermc.paper.enchantments.EnchantmentRarity;
 import io.papermc.paper.registry.set.RegistryKeySet;
 import net.kyori.adventure.text.Component;
+*/
 
 public class instantmine /*extends Enchantment implements Listener*/ {
 
