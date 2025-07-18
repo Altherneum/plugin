@@ -77,7 +77,7 @@ public class serverSelectorItems {
 
         Plugin plugin = Bukkit.getPluginManager().getPlugin("plugin");
         NamespacedKey key = new NamespacedKey(plugin, "AttributeHider");
-        meta.addAttributeModifier(Attribute.GENERIC_ARMOR,
+        meta.addAttributeModifier(Attribute.ARMOR,
                 new AttributeModifier(key, 0.0, Operation.ADD_NUMBER, EquipmentSlotGroup.ANY));
         
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
@@ -187,7 +187,7 @@ public class serverSelectorItems {
         
         Plugin plugin = Bukkit.getPluginManager().getPlugin("plugin");
         NamespacedKey key = new NamespacedKey(plugin, "AttributeHider");
-        meta.addAttributeModifier(Attribute.GENERIC_ARMOR,
+        meta.addAttributeModifier(Attribute.ARMOR,
                 new AttributeModifier(key, 0.0, Operation.ADD_NUMBER, EquipmentSlotGroup.ANY));
 
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
@@ -225,7 +225,7 @@ public class serverSelectorItems {
         
         Plugin plugin = Bukkit.getPluginManager().getPlugin("plugin");
         NamespacedKey key = new NamespacedKey(plugin, "AttributeHider");
-        meta.addAttributeModifier(Attribute.GENERIC_ARMOR,
+        meta.addAttributeModifier(Attribute.ARMOR,
                 new AttributeModifier(key, 0.0, Operation.ADD_NUMBER, EquipmentSlotGroup.ANY));
 
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
