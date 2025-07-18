@@ -29,33 +29,33 @@ public class xpBonus implements Listener {
     public void SetHealthFromLVL(Player player) {
         AttributeModifier attribute = new AttributeModifier("VieLVL", player.getLevel() / 10,
                 AttributeModifier.Operation.ADD_NUMBER);
-        for (AttributeModifier am : player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getModifiers()) {
+        for (AttributeModifier am : player.getAttribute(Attribute.MAX_HEALTH).getModifiers()) {
             if (am.getName().equals("VieLVL")) {
-                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).removeModifier(am);
+                player.getAttribute(Attribute.MAX_HEALTH).removeModifier(am);
             }
         }
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).addModifier(attribute);
+        player.getAttribute(Attribute.MAX_HEALTH).addModifier(attribute);
     }
 
     public void SetArmorFromLVL(Player player) {
         AttributeModifier attribute = new AttributeModifier("ArmorLVL", player.getLevel() / 20,
                 AttributeModifier.Operation.ADD_NUMBER);
-        for (AttributeModifier am : player.getAttribute(Attribute.GENERIC_ARMOR).getModifiers()) {
+        for (AttributeModifier am : player.getAttribute(Attribute.ARMOR).getModifiers()) {
             if (am.getName().equals("ArmorLVL")) {
-                player.getAttribute(Attribute.GENERIC_ARMOR).removeModifier(am);
+                player.getAttribute(Attribute.ARMOR).removeModifier(am);
             }
         }
-        player.getAttribute(Attribute.GENERIC_ARMOR).addModifier(attribute);
+        player.getAttribute(Attribute.ARMOR).addModifier(attribute);
     }
 
     public void SetDamageFromLVL(Player player) {
         AttributeModifier attribute = new AttributeModifier("DamageLVL", player.getLevel() / 20,
                 AttributeModifier.Operation.ADD_NUMBER);
-        for (AttributeModifier am : player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getModifiers()) {
+        for (AttributeModifier am : player.getAttribute(Attribute.ATTACK_DAMAGE).getModifiers()) {
             if (am.getName().equals("DamageLVL")) {
-                player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).removeModifier(am);
+                player.getAttribute(Attribute.ATTACK_DAMAGE).removeModifier(am);
             }
         }
-        player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).addModifier(attribute);
+        player.getAttribute(Attribute.ATTACK_DAMAGE).addModifier(attribute);
     }
 }
