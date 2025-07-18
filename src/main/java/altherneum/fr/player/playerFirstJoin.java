@@ -54,13 +54,13 @@ public class playerFirstJoin implements Listener {
     public void welcomeMessageEverybody(Player player) throws IOException {
         for (Player players : Bukkit.getOnlinePlayers()) {
             lang.languages lang = playerLang.getPlayerLang(player);
-            players.sendMessage(textTranslation.Welcome(lang, player.getDisplayName()));
+            players.sendMessage(textTranslation.Welcome(lang, player.getName()));
         }
     }
 
     public void welcomeMessageToPlayer(Player player) throws IOException {
         lang.languages lang = playerLang.getPlayerLang(player);
-        player.sendMessage(textTranslation.WelcomeBack(lang, player.getDisplayName()));
+        player.sendMessage(textTranslation.WelcomeBack(lang, player.getName()));
     }
 
     public void setPlayerBeta(Player player) throws IOException {

@@ -21,7 +21,7 @@ public class eventsMinecraft implements Listener {
             throws IOException, ParseException, ExecutionException, InterruptedException {
         String achievement = event.getAdvancement().getKey().getKey();
         if (!achievement.contains("recipes")) {
-            String playerName = prefixTag.prefixTagDiscord(event.getPlayer()) + event.getPlayer().displayName();
+            String playerName = prefixTag.prefixTagDiscord(event.getPlayer()) + event.getPlayer().getName();
             ArrayList<String> messages = new ArrayList<>();
             messages.add("```");
             messages.add(playerName);
@@ -34,7 +34,7 @@ public class eventsMinecraft implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e)
             throws IOException, ParseException, ExecutionException, InterruptedException {
-        String playerName = prefixTag.prefixTagDiscord(e.getPlayer()) + e.getPlayer().displayName();
+        String playerName = prefixTag.prefixTagDiscord(e.getPlayer()) + e.getPlayer().getName();
         ArrayList<String> messages = new ArrayList<>();
         messages.add("```");
         messages.add(playerName + "  \uD83D\uDCAC");
@@ -46,7 +46,7 @@ public class eventsMinecraft implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e)
             throws IOException, ParseException, ExecutionException, InterruptedException {
-        String playerName = prefixTag.prefixTagDiscord(e.getPlayer()) + e.getPlayer().displayName();
+        String playerName = prefixTag.prefixTagDiscord(e.getPlayer()) + e.getPlayer().getName();
         ArrayList<String> messages = new ArrayList<>();
         messages.add("```");
         messages.add("✋ Connecté à " + ServerBootFile.getServerType() + ".altherneum.fr");
@@ -58,7 +58,7 @@ public class eventsMinecraft implements Listener {
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent e)
             throws IOException, ParseException, ExecutionException, InterruptedException {
-        String playerName = prefixTag.prefixTagDiscord(e.getPlayer()) + e.getPlayer().displayName();
+        String playerName = prefixTag.prefixTagDiscord(e.getPlayer()) + e.getPlayer().getName();
         ArrayList<String> messages = new ArrayList<>();
         messages.add("```");
         messages.add("⛔ Déconnecté de " + ServerBootFile.getServerType() + ".altherneum.fr");
