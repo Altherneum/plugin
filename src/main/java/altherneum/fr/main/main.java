@@ -17,7 +17,6 @@ import altherneum.fr.commands.player.*;
 import altherneum.fr.discord.discordMain;
 import altherneum.fr.discord.eventsMinecraft;
 import altherneum.fr.discord.messages;
-import altherneum.fr.enchantements.instantmine;
 import altherneum.fr.entity.clickNPC;
 import altherneum.fr.menu.api.customInventoryClick;
 import altherneum.fr.menu.api.persistentDataClick;
@@ -53,14 +52,12 @@ import altherneum.fr.world.spawn.joinAtSpawn;
 import altherneum.fr.world.spawn.limiter;
 
 import org.bukkit.Bukkit;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.HexFormat;
 import java.util.logging.Logger;
 

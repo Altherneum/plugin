@@ -3,8 +3,6 @@ package altherneum.fr.player;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -12,18 +10,12 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
 import altherneum.fr.menu.api.persistentData;
-import altherneum.fr.system.ServerBootFile;
-import altherneum.fr.system.getDataStorage;
 import altherneum.fr.system.gold;
-import altherneum.fr.system.ServerBootFile.serverType;
-import altherneum.fr.system.security.SecurityList;
 import altherneum.fr.text.lang;
 import altherneum.fr.text.playerLang;
 import altherneum.fr.text.textTranslation;
-import altherneum.fr.text.lang.languages;
 import altherneum.fr.world.api.teleportation;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;

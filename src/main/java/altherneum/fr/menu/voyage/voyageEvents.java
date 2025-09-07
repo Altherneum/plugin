@@ -1,7 +1,5 @@
 package altherneum.fr.menu.voyage;
 
-import org.bukkit.WorldType;
-import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
