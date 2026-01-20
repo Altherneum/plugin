@@ -57,7 +57,7 @@ jobs:
     - name: Generate Tag
       id: tag
       run: |
-        TAG="v$(date +'%Y-%m-%d_%H-%M-%S')"
+        TAG="v$(date +'%d-%m-%Y.%H:%M:%S')"
         echo "tag=$TAG" >> $GITHUB_OUTPUT
 
     - name: Forgejo release
