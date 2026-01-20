@@ -20,8 +20,15 @@ jobs:
         apt update
         apt install -y curl
         curl -v http://git.altherneum.fr
-    - name: Network test .git altherneum.fr
+    - name: Network test HTTPs git.altherneum.fr
+      run: |
+        apt update
+        apt install -y curl
+        curl -v https://git.altherneum.fr
+    - name: Network test HTTP altherneum.fr/*/*.git
       run: curl -v http://git.altherneum.fr/Altherneum/plugin.git/info/refs?service=git-upload-pack   
+    - name: Network test HTTPs altherneum.fr/*/*.git
+      run: curl -v https://git.altherneum.fr/Altherneum/plugin.git/info/refs?service=git-upload-pack   
 
     - name: Checkout plugin.git
       run: |
@@ -70,7 +77,7 @@ jobs:
       with:
           tag: ${{ steps.tag.outputs.tag }}
           direction: upload
-          url: http://git.altherneum.fr
+          url: https://git.altherneum.fr
           repo: Altherneum/plugin
           token: ${{ secrets.WRITE_TOKEN_RELEASE_ACTION }}
           release-dir: dist/release
