@@ -20,6 +20,8 @@ jobs:
         apt update
         apt install -y curl
         curl -v http://git.altherneum.fr
+    - name: Network test .git altherneum.fr
+      run: curl -v http://git.altherneum.fr/Altherneum/plugin.git/info/refs?service=git-upload-pack   
 
     - name: Checkout plugin.git
       run: |
@@ -37,6 +39,8 @@ jobs:
         tar -xzf OpenJDK21U-jdk_x64_linux_hotspot_21.*.tar.gz -C /opt/java-$JDK_VERSION --strip-components=1
         echo "JAVA_HOME=/opt/java-$JDK_VERSION" >> $GITHUB_ENV
         echo "/opt/java-$JDK_VERSION/bin" >> $GITHUB_PATH
+    - name: Show Java version
+      run: java -version
 
     - name: Maven 3.8.9 installation
       run: |
