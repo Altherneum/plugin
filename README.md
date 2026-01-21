@@ -1,6 +1,3 @@
-# plugin
-Server side plugin with Spigot / PaperMC & Javacord
-
 # Badges
 ![Doc site](https://img.shields.io/website?down_color=red&down_message=offline&style=badge&up_color=green&up_message=online&url=https%3A%2F%2Fdoc.Altherneum.fr)
 ![MC site](https://img.shields.io/website?down_color=red&down_message=offline&style=badge&up_color=green&up_message=online&url=https%3A%2F%2Fmc.Altherneum.fr)  
@@ -41,10 +38,15 @@ Server side plugin with Spigot / PaperMC & Javacord
 ![Org followers](https://img.shields.io/github/followers/Altherneum?color=red&style=badge)
 ![Org sponsors](https://img.shields.io/github/sponsors/Altherneum?color=red)
 
-# URL
+# plugin
+- Server side plugin with Spigot / PaperMC & Javacord
+
+# Github
 - [Repository](https://github.com/Altherneum/plugin)
 - [Tableau](https://github.com/orgs/Altherneum/projects/3/)
 - [Issues](https://github.com/Altherneum/plugin/issues)
 - [Commits](https://github.com/Altherneum/plugin/commits/main)
 - [Latest release](https://github.com/Altherneum/plugin/releases/latest)
 - [Releases](https://github.com/Altherneum/plugin/releases)
+
+- Git origin : [git.altherneum.fr/altherneum/](git.altherneum.fr/altherneum/)
