@@ -43,6 +43,10 @@ public class commandLimiter implements Listener {
                 }
             }
 
+            if(e.getMessage().split(" ")[0].equalsIgnoreCase("/linkaccount") || e.getMessage().split(" ")[0].equalsIgnoreCase("/unlinkaccount")) {
+                cancel = false;
+            }
+
             if (cancel) {
                 e.setCancelled(true);
                 e.getPlayer().sendMessage(textTranslation.limitedCmd(playerLang.getPlayerLang(e.getPlayer())));

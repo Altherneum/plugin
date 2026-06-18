@@ -43,6 +43,8 @@ public class tabCompleterHidder implements Listener {
                 }
             }
         }
+        cmdList.add("linkaccount");
+        cmdList.add("unlinkaccount");
         return cmdList;
     }
 }
