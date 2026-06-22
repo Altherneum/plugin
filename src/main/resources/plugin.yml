@@ -98,6 +98,10 @@ commands:
     description: "§2Commande d'aide"
     usage: "/<command>"
     aliases: [ aide ]
+  bed:
+    description: "§2Téléporte à votre lit"
+    usage: "/<command>"
+    aliases: [ lit, back, home ]
   island:
     description: "§2Commande d'île"
     usage: "/<command> [Options(String)]\n/<command> [Options(String)] [NOM(String)]"

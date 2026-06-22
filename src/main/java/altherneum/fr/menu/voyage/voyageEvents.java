@@ -44,7 +44,7 @@ public class voyageEvents implements Listener {
     public void PlayerClickBed(InventoryClickEvent e) throws IllegalArgumentException, IOException, ParseException {
         if ((e.getCurrentItem() != null)) {
             if (persistentData.hasPersistentDataItemStack(e.getCurrentItem(), persistentData.customKey.bed)) {
-                clickNPC.tpBed((Player) e.getWhoClicked());
+                teleportation.TeleportToBed((Player) e.getWhoClicked());
             }
         }
     }

@@ -70,27 +70,7 @@ public class clickNPC implements Listener {
     }
 
     public static void tpBed(Player player) throws IOException, ParseException {
-        boolean canTP = false;
-        boolean obstruct = false;
-
-        if (player.getPotentialBedLocation() != null) {
-            canTP = true;
-            if (player.getBedSpawnLocation() == null) {
-                obstruct = true;
-            }
-        }
-
-        lang.languages lang = playerLang.getPlayerLang(player);
-        if (!canTP) {
-            player.sendMessage(textTranslation.noBed(lang));
-        }
-        if (canTP) {
-            if (obstruct) {
-                player.sendMessage(textTranslation.bedObstrued(lang));
-            } else {
-                teleportation.Teleport(player, "world", false, player.getBedSpawnLocation(), true, Environment.NORMAL, WorldType.NORMAL, false);
-            }
-        }
+        teleportation.TeleportToBed(player);
     }
 
     public void QuestMenu(Player player) {

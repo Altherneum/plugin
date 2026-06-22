@@ -11,6 +11,7 @@ import altherneum.fr.menu.island.bonus.bonusPlayerFile;
 import altherneum.fr.menu.shop.specials.bonus.fly;
 import altherneum.fr.menu.shop.specials.bonus.teleportationAura;
 import altherneum.fr.system.ServerBootFile;
+import altherneum.fr.text.lang;
 import altherneum.fr.text.playerLang;
 import altherneum.fr.text.textTranslation;
 
@@ -108,5 +109,29 @@ public class teleportation {
     public static void IgnoreSleeping(Player player, String world) throws IOException {
         player.setSleepingIgnored(
                 world.startsWith("Spawn") || (world.startsWith("i.") && !island.IsInHerIsland(player)));
+    }
+
+    public static void TeleportToBed(Player player) throws IOException, ParseException{
+        boolean canTP = false;
+        boolean obstruct = false;
+
+        if (player.getPotentialBedLocation() != null) {
+            canTP = true;
+            if (player.getBedSpawnLocation() == null) {
+                obstruct = true;
+            }
+        }
+
+        lang.languages lang = playerLang.getPlayerLang(player);
+        if (!canTP) {
+            player.sendMessage(textTranslation.noBed(lang));
+        }
+        if (canTP) {
+            if (obstruct) {
+                player.sendMessage(textTranslation.bedObstrued(lang));
+            } else {
+                teleportation.Teleport(player, "world", false, player.getBedSpawnLocation(), true, Environment.NORMAL, WorldType.NORMAL, false);
+            }
+        }
     }
 }
