@@ -28,7 +28,7 @@ public class teleportation {
 
     public static void Teleport(Player player, String world, Boolean sync, Boolean structure, Environment environment, WorldType worldType, Boolean skyBlock) throws IOException, ParseException {
         if (Bukkit.getWorld(world) == null) {
-            worldManager.Generate(world, false, World.Environment.NORMAL, WorldType.NORMAL, true);
+            worldManager.Generate(world, structure, environment, worldType, skyBlock);
         }
         
         Location spawn = Bukkit.getWorld(world).getSpawnLocation();
