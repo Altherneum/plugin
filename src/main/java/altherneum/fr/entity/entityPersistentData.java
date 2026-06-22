@@ -54,7 +54,7 @@ public class entityPersistentData {
     }
 
     public enum customKey {
-        custom, topgold, commercant, guide, ile, quetes, mainmenu, villager, spawnvillager, tpworld, tpbed, mines,
+        custom, topgold, commercant, guide, ile, quetes, mainmenu, villager, spawnvillager, tpworldsurvie, tpbedsurvie, mines,
         pickaxe
     }
 }

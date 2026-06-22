@@ -249,7 +249,7 @@ public class spawnNPC {
                         entityPersistentData.setPersistentDataEntity(villager,
                                         entityPersistentData.customKey.spawnvillager);
                         entityPersistentData.setPersistentDataEntity(villager, entityPersistentData.customKey.custom);
-                        entityPersistentData.setPersistentDataEntity(villager, entityPersistentData.customKey.tpworld);
+                        entityPersistentData.setPersistentDataEntity(villager, entityPersistentData.customKey.tpworldsurvie);
 
                         villager = Summon(new Location(spawn, 2.5, 64, 11.5, 170, 0), "Téléportation ~ lit", false,
                                         Villager.Profession.FARMER,
@@ -257,7 +257,7 @@ public class spawnNPC {
                         entityPersistentData.setPersistentDataEntity(villager,
                                         entityPersistentData.customKey.spawnvillager);
                         entityPersistentData.setPersistentDataEntity(villager, entityPersistentData.customKey.custom);
-                        entityPersistentData.setPersistentDataEntity(villager, entityPersistentData.customKey.tpbed);
+                        entityPersistentData.setPersistentDataEntity(villager, entityPersistentData.customKey.tpbedsurvie);
 
                         villager = Summon(new Location(spawn, 7.5, 64, -0.5, -90, 30), "Commerçant", false,
                                         Villager.Profession.CARTOGRAPHER,

@@ -111,7 +111,7 @@ public class teleportation {
                 world.startsWith("Spawn") || (world.startsWith("i.") && !island.IsInHerIsland(player)));
     }
 
-    public static void TeleportToBed(Player player) throws IOException, ParseException{
+    public static void TeleportToBed(Player player, String worldName, boolean structure, WorldType worldType, Environment environment, boolean skyBlock) throws IOException, ParseException{
         boolean canTP = false;
         boolean obstruct = false;
 
@@ -130,7 +130,7 @@ public class teleportation {
             if (obstruct) {
                 player.sendMessage(textTranslation.bedObstrued(lang));
             } else {
-                teleportation.Teleport(player, "world", false, player.getBedSpawnLocation(), true, Environment.NORMAL, WorldType.NORMAL, false);
+                teleportation.Teleport(player, worldName, false, player.getBedSpawnLocation(), structure, environment, worldType, skyBlock);
             }
         }
     }

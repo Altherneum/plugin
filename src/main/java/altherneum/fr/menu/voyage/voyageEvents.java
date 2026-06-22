@@ -1,5 +1,7 @@
 package altherneum.fr.menu.voyage;
 
+import org.bukkit.WorldType;
+import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -35,7 +37,7 @@ public class voyageEvents implements Listener {
     public void PlayerClickWorld(InventoryClickEvent e) throws IllegalArgumentException, IOException, ParseException {
         if ((e.getCurrentItem() != null)) {
             if (persistentData.hasPersistentDataItemStack(e.getCurrentItem(), persistentData.customKey.world)) {
-                clickNPC.tpWorld((Player) e.getWhoClicked());
+                clickNPC.tpWorld((Player) e.getWhoClicked(), "world", true, WorldType.NORMAL, Environment.NORMAL, false);
             }
         }
     }
@@ -44,7 +46,7 @@ public class voyageEvents implements Listener {
     public void PlayerClickBed(InventoryClickEvent e) throws IllegalArgumentException, IOException, ParseException {
         if ((e.getCurrentItem() != null)) {
             if (persistentData.hasPersistentDataItemStack(e.getCurrentItem(), persistentData.customKey.bed)) {
-                teleportation.TeleportToBed((Player) e.getWhoClicked());
+                teleportation.TeleportToBed((Player) e.getWhoClicked(), "world", true, WorldType.NORMAL, Environment.NORMAL, false);
             }
         }
     }

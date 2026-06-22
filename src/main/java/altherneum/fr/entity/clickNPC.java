@@ -19,6 +19,7 @@ import altherneum.fr.system.ServerBootFile.serverType;
 import altherneum.fr.text.lang;
 import altherneum.fr.text.playerLang;
 import altherneum.fr.text.textTranslation;
+import altherneum.fr.world.api.structure;
 import altherneum.fr.world.api.teleportation;
 
 import java.io.IOException;
@@ -45,10 +46,10 @@ public class clickNPC implements Listener {
                 RandomMessage(player);
             } else if (entityPersistentData.hasPersistentDataEntity(entity, entityPersistentData.customKey.mainmenu)) {
                 compassMenu.menuCompass(player);
-            } else if (entityPersistentData.hasPersistentDataEntity(entity, entityPersistentData.customKey.tpworld)) {
-                tpWorld(player);
-            } else if (entityPersistentData.hasPersistentDataEntity(entity, entityPersistentData.customKey.tpbed)) {
-                tpBed(player);
+            } else if (entityPersistentData.hasPersistentDataEntity(entity, entityPersistentData.customKey.tpworldsurvie)) {
+                tpWorld(player, "world", true, WorldType.NORMAL, Environment.NORMAL, false);
+            } else if (entityPersistentData.hasPersistentDataEntity(entity, entityPersistentData.customKey.tpbedsurvie)) {
+                tpBed(player, "world", true, WorldType.NORMAL, Environment.NORMAL, false);
             } else if (entityPersistentData.hasPersistentDataEntity(entity, entityPersistentData.customKey.mines)) {
                 mineMenu(player);
             } else if (entityPersistentData.hasPersistentDataEntity(entity, entityPersistentData.customKey.pickaxe)) {
@@ -65,12 +66,12 @@ public class clickNPC implements Listener {
         pickaxeMenu.pickaxeMenu(player);
     }
 
-    public static void tpWorld(Player player) throws IOException, ParseException {
-        teleportation.Teleport(player, "world", false, true, Environment.NORMAL, WorldType.NORMAL, false);
+    public static void tpWorld(Player player, String worldName, boolean structure, WorldType worldType, Environment environment, boolean SkyBlock) throws IOException, ParseException {
+        teleportation.Teleport(player, worldName, false, structure, environment, worldType, SkyBlock);
     }
 
-    public static void tpBed(Player player) throws IOException, ParseException {
-        teleportation.TeleportToBed(player);
+    public static void tpBed(Player player, String worldName, boolean Structure, WorldType worldType, Environment environment, boolean SkyBlock) throws IOException, ParseException {
+        teleportation.TeleportToBed(player, worldName, Structure, worldType, environment, SkyBlock);
     }
 
     public void QuestMenu(Player player) {

@@ -1,5 +1,7 @@
 package altherneum.fr.commands.player;
 
+import org.bukkit.WorldType;
+import org.bukkit.World.Environment;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,9 +16,8 @@ public class bed implements CommandExecutor {
         if (sender instanceof Player) {
             try {
                 if (ServerBootFile.getServerType().equals(ServerBootFile.serverType.Survie)
-                || ServerBootFile.getServerType().equals(ServerBootFile.serverType.RPG)
                 || ServerBootFile.getServerType().equals(ServerBootFile.serverType.Anarchie)) {
-                    clickNPC.tpBed((Player) sender);
+                    clickNPC.tpBed((Player) sender, "world", true, WorldType.NORMAL, Environment.NORMAL, false);
                     return true;
                 }
                 return true;

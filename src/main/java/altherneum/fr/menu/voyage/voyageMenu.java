@@ -26,7 +26,6 @@ public class voyageMenu {
         }
 
         if (ServerBootFile.getServerType().equals(ServerBootFile.serverType.Survie)
-                || ServerBootFile.getServerType().equals(ServerBootFile.serverType.RPG)
                 || ServerBootFile.getServerType().equals(ServerBootFile.serverType.Anarchie)) {
             inventoryBuilder.getInventory().setItem(1, voyageItems.ItemStackSpawn(lang));
             inventoryBuilder.getInventory().setItem(3, voyageItems.ItemStackWorld(lang));
