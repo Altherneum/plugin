@@ -106,7 +106,7 @@ public class itemsTranslation {
 
     public static ArrayList<String> mainBedLore(lang.languages languages) {
         ArrayList<String> Lore = new ArrayList<String>();
-        String commande = "/§6Bed";
+        String commande = "/§6Bed §f[§2lit§f, §2back§f, §2home§f]"; 
         switch (languages) {
             case fr:
                 Lore.add("");
