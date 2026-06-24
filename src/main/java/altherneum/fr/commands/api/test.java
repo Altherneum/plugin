@@ -10,6 +10,7 @@ import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.CustomModelData;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.entity.Player;
+import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ public class test implements CommandExecutor, TabCompleter {
                     player.sendMessage("You are holding the custom sword!");
                 }
                 else{
-                    player.sendMessage("Error, need debug");
+                    player.sendMessage("Error, need debug wrong item in hand");
                 }
             }
             return true;
@@ -75,9 +76,19 @@ public class test implements CommandExecutor, TabCompleter {
         // 2. Retrieve the CustomModelData component
         CustomModelData cmd = item.getData(DataComponentTypes.CUSTOM_MODEL_DATA);
 
-        // 3. Check if the specific string is in the list
-        // The component stores strings in a list accessible via .getStrings()
-        return cmd.getStrings().contains(targetString);
+
+        if (cmd != null) {
+            // Proceed to get strings
+            List<String> modelDataStrings = cmd.strings();
+            if (!modelDataStrings.isEmpty()) {
+                String firstString = modelDataStrings.get(0);
+                // Example: Check if the first string matches a specific value
+                if (targetString.equals(firstString)) {
+                    return true;
+                }
+            }   
+        }
+        return false;
     }
 
     @Override
