@@ -25,11 +25,53 @@ public class test implements CommandExecutor, TabCompleter {
                 }
                 
                 */
+
+                Player player = (Player) sender;
+
+                // 1. Create the base item (e.g., an Iron Sword)
+                ItemStack item = new ItemStack(Material.GOLDEN_SWORD);
+
+                // 2. Modify the Data Components
+                item.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData()
+                    .addString("ak47") // This string matches the "when" value in your resource pack
+                    .build());
+
+                // 3. (Optional) Set a custom name if desired
+                ItemMeta meta = item.getItemMeta();
+                if (meta != null) {
+                    meta.setDisplayName("§6Custom texture test");
+                    item.setItemMeta(meta);
+                }
+
+                // 4. Give the item to the player
+                player.getInventory().addItem(item);
+
+                // Usage Example:
+                if (hasCustomModelString(player.getInventory().getItemInMainHand(), "ak47")) {
+                    player.sendMessage("You are holding the custom sword!");
+                }
+                else{
+                    player.sendMessage("Error, need debug");
+                }
             }
             return true;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public boolean hasCustomModelString(ItemStack item, String targetString) {
+        // 1. Check if the component exists first
+        if (!item.hasData(DataComponentTypes.CUSTOM_MODEL_DATA)) {
+            return false;
+        }
+
+        // 2. Retrieve the CustomModelData component
+        CustomModelData cmd = item.getData(DataComponentTypes.CUSTOM_MODEL_DATA);
+
+        // 3. Check if the specific string is in the list
+        // The component stores strings in a list accessible via .getStrings()
+        return cmd.getStrings().contains(targetString);
     }
 
     @Override
