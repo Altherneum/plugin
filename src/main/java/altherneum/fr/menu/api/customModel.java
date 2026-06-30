@@ -8,12 +8,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.CustomModelData;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.entity.Player;
-import org.bukkit.Material;
-
-import io.papermc.paper.datacomponent.DataComponentTypes;
-import io.papermc.paper.datacomponent.item.CustomModelData;
 
 public class customModel {
     public static void test(Player player){
