@@ -39,7 +39,7 @@ public class customModel {
 
     public static void hasItemInHand(Player player, String modelName){
         // Usage Example:
-        if (hasCustomModelString(player.getInventory().getItemInMainHand(), "ak47")) {
+        if (hasCustomModelString(player.getInventory().getItemInMainHand(), modelName)) {
             player.sendMessage("You are holding the custom sword!");
         }
         else{
