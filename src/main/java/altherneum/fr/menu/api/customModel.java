@@ -3,10 +3,14 @@ package altherneum.fr.menu.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.plugin.Plugin;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.CustomModelData;
@@ -30,15 +34,22 @@ public class customModel {
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
             meta.setDisplayName("§6" + getTitle(modelName));
+            
+            Plugin plugin = Bukkit.getPluginManager().getPlugin("plugin");
+            NamespacedKey maxKey = new NamespacedKey(plugin, "max_durability");
+            NamespacedKey currentKey = new NamespacedKey(plugin, "current_durability");
+            meta.getPersistentDataContainer().set(maxKey, PersistentDataType.INTEGER, maxDurability(modelName));
+            meta.getPersistentDataContainer().set(currentKey, PersistentDataType.INTEGER, maxDurability(modelName));
+
             item.setItemMeta(meta);
-            item.setLore(getLore(modelName));
         }
+
+        item.setLore(getLore(modelName));
 
         persistentData.setPersistentDataItemStack(item, persistentData.customKey.custom);
         persistentData.setPersistentDataItemStack(item, persistentData.customKey.weapon);
-        item.setDurability(maxDurability(modelName));
+        //item.setDurability(maxDurability(modelName));
 
-        // 4. Give the item to the player
         player.getInventory().addItem(item);
 
         hasItemInHand(player, modelName);
@@ -125,7 +136,7 @@ public class customModel {
         return Lore;
     }
 
-    public static short maxDurability(String modelName){
+    public static int maxDurability(String modelName){
         switch (modelName) {
             case "ak47":
                 return 30;
