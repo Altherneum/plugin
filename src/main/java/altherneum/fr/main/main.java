@@ -19,6 +19,7 @@ import altherneum.fr.discord.eventsMinecraft;
 import altherneum.fr.discord.messages;
 import altherneum.fr.entity.clickNPC;
 import altherneum.fr.menu.api.customInventoryClick;
+import altherneum.fr.menu.api.customModelEvent;
 import altherneum.fr.menu.api.persistentDataClick;
 import altherneum.fr.menu.compass.compassEvents;
 import altherneum.fr.menu.island.islandEvents;
@@ -224,6 +225,7 @@ public class main extends JavaPlugin implements PluginMessageListener {
         Bukkit.getPluginManager().registerEvents(new gradesMenuEvent(), this);
         Bukkit.getPluginManager().registerEvents(new anarchieLife(), this);
         Bukkit.getPluginManager().registerEvents(new portalEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new customModelEvent(), this);
     }
 
     // public static final Enchantment INSTANTMINE = new instantmine(new
