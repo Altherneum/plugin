@@ -11,17 +11,17 @@ import io.papermc.paper.datacomponent.item.CustomModelData;
 
 public class customModel {
     public static void test(Player player){
-        giveItem(player, "ak47", Material.GOLDEN_SWORD);
-        hasItemInHand(player,"ak47");
+        giveItem(player, customKey.ak47.toString(), getMaterial(customKey.ak47.toString()));
+        hasItemInHand(player,customKey.ak47.toString());
     }
 
     public static void giveItem(Player player, String modelName, Material material) {
         // 1. Create the base item (e.g., an Iron Sword)
-        ItemStack item = new ItemStack(Material.GOLDEN_SWORD);
+        ItemStack item = new ItemStack(material);
 
         // 2. Modify the Data Components
         item.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData()
-            .addString("ak47") // This string matches the "when" value in your resource pack
+            .addString(modelName) // This string matches the "when" value in your resource pack
             .build());
 
         // 3. (Optional) Set a custom name if desired
@@ -69,5 +69,42 @@ public class customModel {
             }   
         }
         return false;
+    }
+
+    public enum customKey {
+        ak47, shotgun
+    }
+
+    public static Material getMaterial(String modelName){
+        switch (modelName) {
+            case "ak47":
+                return Material.GOLDEN_SWORD;
+            case "shotgun":
+                return Material.GOLDEN_SWORD;
+            default:
+                return Material.AIR;
+        }
+    }
+
+    public static String getTitle(String modelName){
+        switch (modelName) {
+            case "ak47":
+                return "AK-47";
+            case "shotgun":
+                return "ShotGun";
+            default:
+                return "";
+        }
+    }
+
+    public static String getLore(String modelName){
+        switch (modelName) {
+            case "ak47":
+                return "AK-47";
+            case "shotgun":
+                return "ShotGun";
+            default:
+                return "";
+        }
     }
 }
