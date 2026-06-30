@@ -27,7 +27,7 @@ public class customModel {
         // 3. (Optional) Set a custom name if desired
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName("§6Custom texture test");
+            meta.setDisplayName("§6" + getTitle(modelName));
             item.setItemMeta(meta);
         }
 
