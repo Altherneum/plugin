@@ -34,13 +34,6 @@ public class customModel {
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
             meta.setDisplayName("§6" + getTitle(modelName));
-            
-            Plugin plugin = Bukkit.getPluginManager().getPlugin("plugin");
-            NamespacedKey maxKey = new NamespacedKey(plugin, "max_durability");
-            NamespacedKey currentKey = new NamespacedKey(plugin, "current_durability");
-            meta.getPersistentDataContainer().set(maxKey, PersistentDataType.INTEGER, maxDurability(modelName));
-            meta.getPersistentDataContainer().set(currentKey, PersistentDataType.INTEGER, maxDurability(modelName));
-
             item.setItemMeta(meta);
         }
 
@@ -48,7 +41,7 @@ public class customModel {
 
         persistentData.setPersistentDataItemStack(item, persistentData.customKey.custom);
         persistentData.setPersistentDataItemStack(item, persistentData.customKey.weapon);
-        //item.setDurability(maxDurability(modelName));
+        item.setDurability(maxDurability(modelName));
 
         player.getInventory().addItem(item);
 
@@ -125,18 +118,22 @@ public class customModel {
         switch (modelName) {
             case "ak47":
                 Lore.add("§fune §7AK-47");
+                break;
             case "shotgun":
                 Lore.add("§fun §7fusil à pompe");
+                break;
             case "revolver":
                 Lore.add("§fun §7revolver");
+                break;
             default:
                 Lore.add("");
+                break;
         }
         Lore.add("");
         return Lore;
     }
 
-    public static int maxDurability(String modelName){
+    public static short maxDurability(String modelName){
         switch (modelName) {
             case "ak47":
                 return 30;
