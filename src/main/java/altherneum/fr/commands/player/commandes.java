@@ -41,8 +41,8 @@ public class commandes implements CommandExecutor {
                 cmdList.add(cmd);
             }
         }
-        cmdList.add("$6linkaccount $r: ($2Bedrock$r)");
-        cmdList.add("$6unlinkaccount $r: ($2Bedrock$r)");
+        cmdList.add("§6linkaccount §r: (§2Bedrock§r)");
+        cmdList.add("§6unlinkaccount §r: (§2Bedrock§r)");
         return cmdList;
     }
 }
