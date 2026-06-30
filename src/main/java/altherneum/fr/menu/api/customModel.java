@@ -41,7 +41,7 @@ public class customModel {
 
         persistentData.setPersistentDataItemStack(item, persistentData.customKey.custom);
         persistentData.setPersistentDataItemStack(item, persistentData.customKey.weapon);
-        item.setDurability(maxDurability(modelName));
+        item.setDurability((short) 0);
 
         player.getInventory().addItem(item);
 

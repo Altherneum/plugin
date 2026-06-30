@@ -29,7 +29,7 @@ public class customModelEvent implements Listener {
 
                         e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), org.bukkit.Sound.UI_BUTTON_CLICK, 1.0f, 0.8f);
 
-                        e.getItem().setDurability((short) (e.getItem().getDurability()-1));
+                        e.getItem().setDurability((short) (e.getItem().getDurability()+1));
                         
                         ItemMeta meta = e.getItem().getItemMeta();
                         if (meta instanceof Damageable) {
