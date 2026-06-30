@@ -1,0 +1,79 @@
+package altherneum.fr.menu.api;
+
+import java.util.List;
+
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.CustomModelData;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.entity.Player;
+import org.bukkit.Material;
+
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.CustomModelData;
+
+public class customModel {
+    public static void test(Player player){
+        giveItem(player, "ak47", Material.GOLDEN_SWORD);
+        hasItemInHand(player,"ak47");
+    }
+
+    public static void giveItem(Player player, String modelName, Material material) {
+        // 1. Create the base item (e.g., an Iron Sword)
+        ItemStack item = new ItemStack(Material.GOLDEN_SWORD);
+
+        // 2. Modify the Data Components
+        item.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData()
+            .addString("ak47") // This string matches the "when" value in your resource pack
+            .build());
+
+        // 3. (Optional) Set a custom name if desired
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            meta.setDisplayName("§6Custom texture test");
+            item.setItemMeta(meta);
+        }
+
+        // 4. Give the item to the player
+        player.getInventory().addItem(item);
+
+        hasItemInHand(player, modelName);
+    }
+
+    public static void hasItemInHand(Player player, String modelName){
+        // Usage Example:
+        if (hasCustomModelString(player.getInventory().getItemInMainHand(), "ak47")) {
+            player.sendMessage("You are holding the custom sword!");
+        }
+        else{
+            player.sendMessage("Error, need debug wrong item in hand");
+        }
+    }
+
+    public static boolean hasCustomModelString(ItemStack item, String targetString) {
+        // 1. Check if the component exists first
+        if (!item.hasData(DataComponentTypes.CUSTOM_MODEL_DATA)) {
+            return false;
+        }
+
+        // 2. Retrieve the CustomModelData component
+        CustomModelData cmd = item.getData(DataComponentTypes.CUSTOM_MODEL_DATA);
+
+
+        if (cmd != null) {
+            // Proceed to get strings
+            List<String> modelDataStrings = cmd.strings();
+            if (!modelDataStrings.isEmpty()) {
+                String firstString = modelDataStrings.get(0);
+                // Example: Check if the first string matches a specific value
+                if (targetString.equals(firstString)) {
+                    return true;
+                }
+            }   
+        }
+        return false;
+    }
+}
