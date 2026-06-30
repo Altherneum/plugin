@@ -17,8 +17,10 @@ public class customModelEvent implements Listener {
     public void PlayerUseCustomModel(PlayerInteractEvent e) throws IllegalArgumentException, IOException, ParseException {
         if ((e.getItem() != null)) {
             if (persistentData.hasPersistentDataItemStack(e.getItem(), persistentData.customKey.weapon) && !e.getItem().getItemMeta().hasUseCooldown()) {
-                if(e.getItem().getDurability()>= 1){
+                if(e.getItem().getDurability()>= 1 && e.getAction().isLeftClick()){
                     if(customModel.hasCustomModelString(e.getItem(), "ak47")){
+                        e.setCancelled(true);
+
                         e.getPlayer().setCooldown(e.getItem(), customModel.coolDown("ak47"));
                         Projectile projectile = e.getPlayer().launchProjectile(Fireball.class); // Can use Fireball, Snowball, etc.
 
@@ -30,14 +32,6 @@ public class customModelEvent implements Listener {
                         e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), org.bukkit.Sound.UI_BUTTON_CLICK, 1.0f, 0.8f);
 
                         e.getItem().setDurability((short) (e.getItem().getDurability()+1));
-                        
-                        ItemMeta meta = e.getItem().getItemMeta();
-                        if (meta instanceof Damageable) {
-                            double percentage = (double) e.getItem().getDurability() / customModel.maxDurability("ak47");
-                            int vanillaMaxDurability = e.getItem().getType().getMaxDurability();
-                            short newVanillaDurability = (short) (vanillaMaxDurability - (int) Math.round(vanillaMaxDurability * percentage));
-                            e.getItem().damage(1, e.getPlayer());
-                        }
 
                         e.getPlayer().updateInventory();
                     }
@@ -49,11 +43,13 @@ public class customModelEvent implements Listener {
                         e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), org.bukkit.Sound.ITEM_CROSSBOW_LOADING_START, 1.0f, 0.8f);
                         e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), org.bukkit.Sound.UI_BUTTON_CLICK, 1.0f, 0.8f);
 
-                        e.getItem().setDurability(customModel.maxDurability("ak47"));
+                        e.getItem().setDurability((short) 0);
 
                         e.getPlayer().updateInventory();
                     }
                 }
+
+                e.getPlayer().sendMessage("test : " + e.getItem().getDurability());
             }
         }
     }
