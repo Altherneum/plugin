@@ -15,7 +15,7 @@ public class customModelEvent implements Listener {
     public void PlayerUseCustomModel(PlayerInteractEvent e) throws IllegalArgumentException, IOException, ParseException {
         if ((e.getItem() != null)) {
             if (persistentData.hasPersistentDataItemStack(e.getItem(), persistentData.customKey.weapon) && !e.getItem().getItemMeta().hasUseCooldown()) {
-                if(e.getItem().getDurability()>= 1 && e.getAction().isLeftClick()){
+                if(e.getItem().getDurability() < customModel.maxDurability("ak47") && (e.getAction().isLeftClick() || e.getAction().isRightClick())){
                     
                 e.getPlayer().sendMessage("dura pre : " + e.getItem().getDurability());
 
@@ -37,7 +37,7 @@ public class customModelEvent implements Listener {
                         e.getPlayer().updateInventory();
                     }
                 }
-                else if(e.getItem().getDurability()== 0 && (e.getAction().isLeftClick() || e.getAction().isRightClick())){
+                else if(e.getItem().getDurability() >= customModel.maxDurability("ak47") && (e.getAction().isLeftClick() || e.getAction().isRightClick())){
                     if(customModel.hasCustomModelString(e.getItem(), "ak47")){
                         e.getPlayer().setCooldown(e.getItem(), customModel.reloadCoolDown("ak47"));
 
