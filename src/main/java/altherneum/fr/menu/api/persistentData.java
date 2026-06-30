@@ -100,6 +100,8 @@ public class persistentData {
 
         grade, aventurier, soldat,
 
-        anarchielife
+        anarchielife,
+
+        weapon
     }
 }

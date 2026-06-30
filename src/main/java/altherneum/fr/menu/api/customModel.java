@@ -1,11 +1,13 @@
 package altherneum.fr.menu.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.CustomModelData;
 
@@ -21,7 +23,7 @@ public class customModel {
 
         // 2. Modify the Data Components
         item.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData()
-            .addString(modelName) // This string matches the "when" value in your resource pack
+            .addString(realModelName(modelName)) // This string matches the "when" value in your resource pack
             .build());
 
         // 3. (Optional) Set a custom name if desired
@@ -29,7 +31,12 @@ public class customModel {
         if (meta != null) {
             meta.setDisplayName("§6" + getTitle(modelName));
             item.setItemMeta(meta);
+            item.setLore(getLore(modelName));
         }
+
+        persistentData.setPersistentDataItemStack(item, persistentData.customKey.custom);
+        persistentData.setPersistentDataItemStack(item, persistentData.customKey.weapon);
+        item.setDurability(maxDurability(modelName));
 
         // 4. Give the item to the player
         player.getInventory().addItem(item);
@@ -72,7 +79,7 @@ public class customModel {
     }
 
     public enum customKey {
-        ak47, shotgun
+        ak47, shotgun, revolver
     }
 
     public static Material getMaterial(String modelName){
@@ -80,6 +87,8 @@ public class customModel {
             case "ak47":
                 return Material.GOLDEN_SWORD;
             case "shotgun":
+                return Material.GOLDEN_SWORD;
+            case "revolver":
                 return Material.GOLDEN_SWORD;
             default:
                 return Material.AIR;
@@ -92,17 +101,77 @@ public class customModel {
                 return "AK-47";
             case "shotgun":
                 return "ShotGun";
+            case "revolver":
+                return "Revolver";
             default:
                 return "";
         }
     }
 
-    public static String getLore(String modelName){
+    public static ArrayList<String> getLore(String modelName) {
+        ArrayList<String> Lore = new ArrayList<String>();
+        Lore.add("");
         switch (modelName) {
             case "ak47":
-                return "AK-47";
+                Lore.add("§fune §7AK-47");
             case "shotgun":
-                return "ShotGun";
+                Lore.add("§fun §7fusil à pompe");
+            case "revolver":
+                Lore.add("§fun §7revolver");
+            default:
+                Lore.add("");
+        }
+        Lore.add("");
+        return Lore;
+    }
+
+    public static short maxDurability(String modelName){
+        switch (modelName) {
+            case "ak47":
+                return 30;
+            case "shotgun":
+                return 6;
+            case "revolver":
+                return 6;
+            default:
+                return 0;
+        }
+    }
+
+    public static short coolDown(String modelName){ //tick
+        switch (modelName) {
+            case "ak47":
+                return 10;
+            case "shotgun":
+                return 30;
+            case "revolver":
+                return 30;
+            default:
+                return 0;
+        }
+    }
+
+        public static short reloadCoolDown(String modelName){ //tick
+        switch (modelName) {
+            case "ak47":
+                return 45;
+            case "shotgun":
+                return 60;
+            case "revolver":
+                return 60;
+            default:
+                return 0;
+        }
+    }
+
+    public static String realModelName(String modelName){
+        switch (modelName) {
+            case "ak47":
+                return "ak47";
+            case "shotgun":
+                return "shotgun";
+            case "revolver":
+                return "revolver";
             default:
                 return "";
         }
