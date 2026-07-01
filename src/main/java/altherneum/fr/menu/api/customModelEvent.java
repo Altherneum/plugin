@@ -39,6 +39,7 @@ public class customModelEvent implements Listener {
                 }
                 else if(e.getItem().getDurability() >= customModel.maxDurability("ak47") && (e.getAction().isLeftClick() || e.getAction().isRightClick())){
                     if(customModel.hasCustomModelString(e.getItem(), "ak47")){
+                        e.setCancelled(true);
                         e.getPlayer().setCooldown(e.getItem(), customModel.reloadCoolDown("ak47"));
 
                         e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), org.bukkit.Sound.ITEM_CROSSBOW_LOADING_START, 1.0f, 0.8f);

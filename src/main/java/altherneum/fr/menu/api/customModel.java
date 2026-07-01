@@ -3,14 +3,10 @@ package altherneum.fr.menu.api;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.plugin.Plugin;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.CustomModelData;
@@ -22,15 +18,12 @@ public class customModel {
     }
 
     public static void giveItem(Player player, String modelName, Material material) {
-        // 1. Create the base item (e.g., an Iron Sword)
         ItemStack item = new ItemStack(material);
 
-        // 2. Modify the Data Components
         item.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData()
-            .addString(realModelName(modelName)) // This string matches the "when" value in your resource pack
+            .addString(realModelName(modelName))
             .build());
 
-        // 3. (Optional) Set a custom name if desired
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
             meta.setDisplayName("§6" + getTitle(modelName));
@@ -49,7 +42,6 @@ public class customModel {
     }
 
     public static void hasItemInHand(Player player, String modelName){
-        // Usage Example:
         if (hasCustomModelString(player.getInventory().getItemInMainHand(), modelName)) {
             player.sendMessage("You are holding the custom sword!");
         }
@@ -59,21 +51,17 @@ public class customModel {
     }
 
     public static boolean hasCustomModelString(ItemStack item, String targetString) {
-        // 1. Check if the component exists first
         if (!item.hasData(DataComponentTypes.CUSTOM_MODEL_DATA)) {
             return false;
         }
 
-        // 2. Retrieve the CustomModelData component
         CustomModelData cmd = item.getData(DataComponentTypes.CUSTOM_MODEL_DATA);
 
 
         if (cmd != null) {
-            // Proceed to get strings
             List<String> modelDataStrings = cmd.strings();
             if (!modelDataStrings.isEmpty()) {
                 String firstString = modelDataStrings.get(0);
-                // Example: Check if the first string matches a specific value
                 if (targetString.equals(firstString)) {
                     return true;
                 }
