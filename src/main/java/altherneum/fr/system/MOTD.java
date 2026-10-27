@@ -5,6 +5,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.ServerListPingEvent;
 
+import altherneum.fr.text.textTranslation;
+
 public class MOTD implements Listener {
     @EventHandler
     public void onServerListPing(ServerListPingEvent e) {
@@ -14,8 +16,8 @@ public class MOTD implements Listener {
     }
 
     public static String MOTD() {
-        String BootText = "§6[ §2§laltherneum§r.fr §6] §6";
-        String BottomText = " §r!\n§raltherneum.fr/§2discord";
+        String BootText = "§6[ §2§l" + textTranslation.ServerName() + textTranslation.ServerTLD() + " §6] §6";
+        String BottomText = " §r!\n§r" + textTranslation.ServerName() + textTranslation.ServerTLD() + "/§2discord";
         return BootText + ServerBootFile.getServerType().toString() + BottomText;
     }
 }
