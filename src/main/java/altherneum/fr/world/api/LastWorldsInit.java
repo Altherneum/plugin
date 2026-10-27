@@ -19,7 +19,7 @@ public class LastWorldsInit {
             @Override
             public void run() {
                 try {
-                    serverType serverType = ServerBootFile.getServerTypeFromYML();
+                    serverType serverType = ServerBootFile.getServerType();
                     switch (serverType) {
                         case RPG:
                             return;
@@ -66,7 +66,7 @@ public class LastWorldsInit {
             @Override
             public void run() {
                 try {
-                    serverType serverType = ServerBootFile.getServerTypeFromYML();
+                    serverType serverType = ServerBootFile.getServerType();
                     if (serverType.equals(ServerBootFile.serverType.OPPrison)) {
                         mineOresGeneration.startGeneration("Mine.1");
                         mineOresGeneration.startGeneration("Mine.2");

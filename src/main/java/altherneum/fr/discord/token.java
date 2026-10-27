@@ -1,37 +1,15 @@
 package altherneum.fr.discord;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
 import altherneum.fr.system.ServerBootFile;
-import altherneum.fr.system.ServerBootFile.serverType;
 
 public class token {
-    public static File tokensFile() {
-        String FolderName = "/Serveurs/DataFolder/";
-        // String FolderName = "C:\\Users\\user\\Desktop";
-        String FileName = "tokens.yml";
-        File file = new File(FolderName, FileName);
-        return file;
-    }
-
-    public static String getTokens() throws IOException {
-        if (tokensFile().exists()) {
-            FileConfiguration fileConfiguration = YamlConfiguration
-                    .loadConfiguration(tokensFile());
-            serverType bot = ServerBootFile.getServerTypeFromYML();
-            return fileConfiguration.getString(bot.toString());
-        } else {
-            tokensFile().createNewFile();
-        }
-        return "";
+    public static String getTokens() {
+        String token = System.getenv("DISCORD_BOT_TOKEN");
+        return token == null ? "" : token.trim();
     }
 
     public static String channel() {
-        switch (ServerBootFile.getServerTypeFromYML()) {
+        switch (ServerBootFile.getServerType()) {
             case SkyBlock:
                 return "1081945139355848835";
             case RPG:

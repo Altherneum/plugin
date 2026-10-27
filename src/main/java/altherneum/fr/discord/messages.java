@@ -13,6 +13,9 @@ import java.util.concurrent.ExecutionException;
 
 public class messages {
     public static void botStop() throws ExecutionException, InterruptedException {
+        if (discordMain.api == null) {
+            return;
+        }
         MessageBuilder messageBuilder = new MessageBuilder();
         messageBuilder.append("**Bot & serveur __" + ServerBootFile.serverTypeActual.toString() + " hors ligne__** ❌");
         ServerTextChannel serverTextChannel = discordMain.api.getServerTextChannelById(token.rebootChannelID())
@@ -23,6 +26,9 @@ public class messages {
     }
 
     public static void botStart() {
+        if (discordMain.api == null) {
+            return;
+        }
         MessageBuilder messageBuilder = new MessageBuilder();
         messageBuilder.append("**Bot & serveur __" + ServerBootFile.serverTypeActual.toString() + " en ligne__** ✅");
         ServerTextChannel serverTextChannel = discordMain.api.getServerTextChannelById(token.rebootChannelID())
@@ -45,12 +51,14 @@ public class messages {
             temps += " secondes ";
             time = sec;
         }
-        MessageBuilder messageBuilder = new MessageBuilder();
-        messageBuilder.append("**__Redémarrage__ Bot & serveur " + ServerBootFile.serverTypeActual.toString()
-                + "** dans ⏳ " + time + temps + " " + "\uD83D\uDEA5");
-        ServerTextChannel serverTextChannel = discordMain.api.getServerTextChannelById(token.rebootChannelID())
-                .get();
-        messageBuilder.send(serverTextChannel);
+        if (discordMain.api != null) {
+            MessageBuilder messageBuilder = new MessageBuilder();
+            messageBuilder.append("**__Redémarrage__ Bot & serveur " + ServerBootFile.serverTypeActual.toString()
+                    + "** dans ⏳ " + time + temps + " " + "\uD83D\uDEA5");
+            ServerTextChannel serverTextChannel = discordMain.api.getServerTextChannelById(token.rebootChannelID())
+                    .get();
+            messageBuilder.send(serverTextChannel);
+        }
         // SendMessageToChannel("**__Redémarrage__ Bot & serveur " +
         // ServerBootFile.serverTypeActual.toString() + "** dans ⏳ " + time + temps + "
         // " + "\uD83D\uDEA5");
@@ -61,6 +69,9 @@ public class messages {
     }
 
     public static void SendMessageToChannel(String message) {
+        if (discordMain.api == null) {
+            return;
+        }
         MessageBuilder messageBuilder = new MessageBuilder();
         messageBuilder.append(message);
         ServerTextChannel serverTextChannel = discordMain.api.getServerTextChannelById(token.channel()).get();
@@ -68,6 +79,9 @@ public class messages {
     }
 
     public static void SendMessageToChannel(ArrayList<String> message) throws ExecutionException, InterruptedException {
+        if (discordMain.api == null) {
+            return;
+        }
         MessageBuilder messageBuilder = new MessageBuilder();
         for (String string : message) {
             messageBuilder.append(string);

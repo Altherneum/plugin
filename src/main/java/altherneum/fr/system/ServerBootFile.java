@@ -1,11 +1,8 @@
 package altherneum.fr.system;
 
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.Locale;
 
 public class ServerBootFile {
     public static serverType serverTypeActual;
@@ -18,30 +15,37 @@ public class ServerBootFile {
         return serverTypeActual;
     }
 
-    public static void setServerType() {
-        serverTypeActual = getServerTypeFromYML();
+    public static void loadServerType() {
+        serverTypeActual = getServerTypeFromEnv();
     }
 
-    public static serverType getServerTypeFromYML() {
-        FileConfiguration fileConfiguration = YamlConfiguration.loadConfiguration(getDataStorage.serverTypeFile());
-        return ServerBootFile.serverType
-                .valueOf(fileConfiguration.getString("serverType." + Bukkit.getServer().getPort()));
-    }
-
-    public static void loadServerTypeFile() throws IOException {
-        File file = getDataStorage.serverTypeFile();
-        if (!file.exists()) {
-            file.createNewFile();
-            FileConfiguration fileConfiguration = YamlConfiguration.loadConfiguration(file);
-            fileConfiguration.set("serverType." + Bukkit.getServer().getPort(), serverType.Hub.name());
-            fileConfiguration.save(file);
-        } else {
-            FileConfiguration fileConfiguration = YamlConfiguration.loadConfiguration(getDataStorage.serverTypeFile());
-            if (fileConfiguration.get("serverType." + Bukkit.getServer().getPort()) == null) {
-                fileConfiguration.set("serverType." + Bukkit.getServer().getPort(), serverType.Hub.name());
-                fileConfiguration.save(file);
-            }
+    public static serverType getServerTypeFromEnv() {
+        String name = System.getenv("SERVER_NAME");
+        if (name == null || name.isBlank()) {
+            Bukkit.getLogger().warning("SERVER_NAME absent : type Hub par défaut.");
+            return serverType.Hub;
         }
-        setServerType();
+        switch (name.trim().toLowerCase(Locale.ROOT)) {
+            case "hub":
+                return serverType.Hub;
+            case "skyblock":
+                return serverType.SkyBlock;
+            case "rpg":
+                return serverType.RPG;
+            case "survie":
+                return serverType.Survie;
+            case "anarchie":
+                return serverType.Anarchie;
+            case "creatif":
+                return serverType.Creatif;
+            case "opprison":
+                return serverType.OPPrison;
+            case "test":
+                // Le serveur de test utilise les règles de Survie.
+                return serverType.Survie;
+            default:
+                Bukkit.getLogger().warning("SERVER_NAME inconnu (" + name + ") : type Hub par défaut.");
+                return serverType.Hub;
+        }
     }
 }

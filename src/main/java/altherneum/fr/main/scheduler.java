@@ -43,7 +43,7 @@ public class scheduler {
             @Override
             public void run() {
                 try {
-                    String server = ServerBootFile.getServerTypeFromYML().toString().toLowerCase(Locale.ROOT);
+                    String server = ServerBootFile.getServerType().toString().toLowerCase(Locale.ROOT);
                     File file = getDataStorage.serversStatsFile(server);
                     if (!file.exists()) {
                         file.createNewFile();
@@ -84,7 +84,7 @@ public class scheduler {
     public static void BuildSpawn() throws IOException, ParseException {
         Boolean BuildSpawn = false;
 
-        String server = ServerBootFile.getServerTypeFromYML().toString().toLowerCase(Locale.ROOT);
+        String server = ServerBootFile.getServerType().toString().toLowerCase(Locale.ROOT);
         File file = getDataStorage.serversStatsFile(server);
 
         if (!file.exists()) {
@@ -100,7 +100,7 @@ public class scheduler {
         }
 
         if (BuildSpawn) {
-            structure.setStructure(structure.SpawnName(ServerBootFile.getServerTypeFromYML()), "Spawn", 20, 40);
+            structure.setStructure(structure.SpawnName(ServerBootFile.getServerType()), "Spawn", 20, 40);
             LastWorldsInit.LoadWorld();
         }
 

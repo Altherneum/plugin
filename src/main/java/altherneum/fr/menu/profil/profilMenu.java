@@ -23,7 +23,7 @@ public class profilMenu {
         inventoryBuilder.getInventory().setItem(0, profilItems.ItemStackInfo(lang, offlinePlayer));
         inventoryBuilder.getInventory().setItem(1, profilItems.ItemStackTags(lang, offlinePlayer));
         inventoryBuilder.getInventory().setItem(2, profilItems.ItemStackPlayerData(lang, offlinePlayer));
-        if (ServerBootFile.getServerTypeFromYML().equals(serverType.SkyBlock)) {
+        if (ServerBootFile.getServerType().equals(serverType.SkyBlock)) {
             inventoryBuilder.getInventory().setItem(3, islandItems.ItemStackPlayerHeadInfoVisite(offlinePlayer, lang));
         }
         player.openInventory(inventoryBuilder.getInventory());

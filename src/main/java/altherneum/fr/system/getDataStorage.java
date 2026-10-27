@@ -40,10 +40,6 @@ public class getDataStorage {
         return dataFolder;
     }
 
-    public static File serverTypeFile() {
-        return new File(dataFolder(), "serverTypeFile.yml");
-    }
-
     public static File serversStatsFile(String server) {
         return new File(dataFolder(), server + ".yml");
     }

@@ -78,11 +78,8 @@ public class main extends JavaPlugin implements PluginMessageListener {
     @Override
     public void onLoad() {
         logger.info("Plugin Loaded");
-        try {
-            ServerBootFile.loadServerTypeFile();
-            logger.info(ServerBootFile.getServerType().toString());
-        } catch (Exception e) {
-        }
+        ServerBootFile.loadServerType();
+        logger.info(ServerBootFile.getServerType().toString());
     }
 
     @Override

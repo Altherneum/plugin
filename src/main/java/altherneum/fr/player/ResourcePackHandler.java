@@ -34,7 +34,7 @@ public class ResourcePackHandler implements Listener {
             sha1 = getSHA1(url);
         }
 
-        serverType serverTypes = ServerBootFile.getServerTypeFromYML();
+        serverType serverTypes = ServerBootFile.getServerType();
         if (serverTypes.equals(serverType.Hub)) {
             setResourcePack(e.getPlayer(), url, sha1, text, force);
         }//Fix if player join directly on other server
