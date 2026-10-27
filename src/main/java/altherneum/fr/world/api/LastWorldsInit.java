@@ -67,7 +67,7 @@ public class LastWorldsInit {
             public void run() {
                 try {
                     serverType serverType = ServerBootFile.getServerTypeFromYML();
-                    if (serverType.equals(altherneum.fr.system.ServerBootFile.serverType.OPPrison)) {
+                    if (serverType.equals(ServerBootFile.serverType.OPPrison)) {
                         mineOresGeneration.startGeneration("Mine.1");
                         mineOresGeneration.startGeneration("Mine.2");
                         mineOresGeneration.startGeneration("Mine.3");
