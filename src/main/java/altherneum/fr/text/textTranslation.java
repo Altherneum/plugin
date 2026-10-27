@@ -313,7 +313,7 @@ public class textTranslation {
 
     public static String ServerName(){
         String name = System.getenv("DOMAIN_NAME");
-        if(name.equals(null)){
+        if(name == null){
             return "DOMAIN_NAME";
         }
         return name;
@@ -321,7 +321,7 @@ public class textTranslation {
 
     public static String ServerTLD(){
         String name = System.getenv("TLD");
-        if(name.equals(null)){
+        if(name == null){
             return ".TLD";
         }
         return name;
