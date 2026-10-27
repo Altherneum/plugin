@@ -311,12 +311,28 @@ public class textTranslation {
         }
     }
 
+    public static String ServerName(){
+        String name = System.getenv("DOMAIN_NAME");
+        if(name.equals(null)){
+            return "DOMAIN_NAME";
+        }
+        return name;
+    }
+
+    public static String ServerTLD(){
+        String name = System.getenv("TLD");
+        if(name.equals(null)){
+            return ".TLD";
+        }
+        return name;
+    }
+
     public static String banned(lang.languages languages) {
         switch (languages) {
             case fr:
-                return "§4Vous êtes §lbanni §r§4!\n§6Discord §rpour toutes demandes Altherneum.fr/discord";
+                return "§4Vous êtes §lbanni §r§4!\n§6Discord §rpour toutes demandes " + ServerName() + ServerTLD() + "/discord";
             case en:
-                return "§4You are §lbanned §r§4!\n§6Discord §rfor all requests Altherneum.fr/discord";
+                return "§4You are §lbanned §r§4!\n§6Discord §rfor all requests " + ServerName() + ServerTLD() + "/discord";
             default:
                 return "";
         }
@@ -325,9 +341,9 @@ public class textTranslation {
     public static String Whitelist(lang.languages languages) {
         switch (languages) {
             case fr:
-                return "§4Vous êtes §lpas sous white list §r§4!\n§6Discord §rpour toutes demandes Altherneum.fr/discord";
+                return "§4Vous êtes §lpas sous white list §r§4!\n§6Discord §rpour toutes demandes " + ServerName() + ServerTLD() + "/discord";
             case en:
-                return "§4You are §lnot whitelisted §r§4!\n§6Discord §rfor all requests Altherneum.fr/discord";
+                return "§4You are §lnot whitelisted §r§4!\n§6Discord §rfor all requests " + ServerName() + ServerTLD() + "/discord";
             default:
                 return "";
         }
@@ -336,9 +352,9 @@ public class textTranslation {
     public static String WelcomeBack(lang.languages languages, String playerName) {
         switch (languages) {
             case fr:
-                return "§6§lBon retour §r" + playerName + " §2sur §laltherneum.fr";
+                return "§6§lBon retour §r" + playerName + " §2sur §l" + ServerName() + ServerTLD() + "";
             case en:
-                return "§6§lWelcome back §r" + playerName + " §2on §laltherneum.fr";
+                return "§6§lWelcome back §r" + playerName + " §2on §l" + ServerName() + ServerTLD() + "";
             default:
                 return "";
         }
@@ -628,7 +644,7 @@ public class textTranslation {
     }
 
     public static String DiscordNoNewLine() {
-        return "§faltherneum.fr/§6discord";
+        return "§f" + ServerName() + ServerTLD() + "/§6discord";
     }
 
     public static String Discord() {
@@ -850,9 +866,9 @@ public class textTranslation {
     public static String bannedAnarchie(lang.languages lang) {
         switch (lang) {
             case fr:
-                return "§4Vous êtes §lmort (24h) §r§4!\n§6Discord §rpour toutes demandes Altherneum.fr/discord";
+                return "§4Vous êtes §lmort (24h) §r§4!\n§6Discord §rpour toutes demandes " + ServerName() + ServerTLD() + "/discord";
             case en:
-                return "§4You are §ldead (24h) §r§4!\n§6Discord §rfor all requests Altherneum.fr/discord";
+                return "§4You are §ldead (24h) §r§4!\n§6Discord §rfor all requests " + ServerName() + ServerTLD() + "/discord";
             default:
                 return "";
         }
