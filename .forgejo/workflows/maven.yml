@@ -15,28 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Network test HTTP git.altherneum.fr
-      run: |
-        apt update
-        apt install -y curl
-        curl -v http://git.altherneum.fr
-    - name: Network test HTTPs git.altherneum.fr
-      run: |
-        apt update
-        apt install -y curl
-        curl -v https://git.altherneum.fr
-    - name: Network test HTTP altherneum.fr/*/*.git
-      run: curl -v http://git.altherneum.fr/Altherneum/plugin.git/info/refs?service=git-upload-pack   
-    - name: Network test HTTPs altherneum.fr/*/*.git
-      run: curl -v https://git.altherneum.fr/Altherneum/plugin.git/info/refs?service=git-upload-pack   
-
-    - name: Checkout plugin.git
-      run: |
-        git init
-        git config --global --add safe.directory /github/workspace
-        git remote add origin http://git.altherneum.fr/Altherneum/plugin.git
-        git fetch --depth=1 origin main
-        git checkout FETCH_HEAD
+    - uses: actions/checkout@v4
 
     - name: Install OpenJDK 21 manually
       run: |
@@ -49,12 +28,12 @@ jobs:
     - name: Show Java version
       run: java -version
 
-    - name: Maven 3.8.9 installation
+    - name: Maven 3.9.9 installation
       run: |
-        MAVEN_VERSION=3.8.9
+        MAVEN_VERSION=3.9.9
         MAVEN_HOME=/opt/maven
         mkdir -p $MAVEN_HOME
-        curl -fsSL https://dlcdn.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /opt/maven --strip-components=1
+        curl -fsSL https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /opt/maven --strip-components=1
         ln -s $MAVEN_HOME/bin/mvn /usr/local/bin/mvn
 
     - name: Build with Maven
@@ -75,10 +54,10 @@ jobs:
     - name: Forgejo release
       uses: actions/forgejo-release@v2.7.3
       with:
-          tag: ${{ steps.tag.outputs.tag }}
-          direction: upload
-          url: https://git.altherneum.fr
-          repo: Altherneum/plugin
-          token: ${{ secrets.WRITE_TOKEN_RELEASE_ACTION }}
-          release-dir: dist/release
-          release-notes: "RELEASE ${{ steps.tag.outputs.tag }}"
+        tag: ${{ steps.tag.outputs.tag }}
+        direction: upload
+        url: https://git.altherneum.fr
+        repo: Altherneum/plugin
+        token: ${{ secrets.WRITE_TOKEN_RELEASE_ACTION }}
+        release-dir: dist/release
+        release-notes: "RELEASE ${{ steps.tag.outputs.tag }}"
