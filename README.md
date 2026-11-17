@@ -58,8 +58,8 @@
 Déplacez vous dans le repo du plugin (exemple `cd ~/repo/plugin`)
 ```sh
 ./scripts/test-local.sh # skyblock par défaut
-./scripts/test-local.sh --server hub # hub
-./scripts/test-local.sh --server survie --port 25566
+./scripts/test-local.sh --server hub # hub, skyblock etc
+./scripts/test-local.sh --server survie --port 25566 # Pour changer le port
 ./scripts/test-local.sh --no-run # prépare seulement
 ./scripts/test-local.sh --fresh # repart de zéro (mondes supprimés)
 ./scripts/test-local.sh --no-build # relance sans recompiler
