@@ -336,7 +336,7 @@ if [ ! -f "$TEST_DIR/server.properties" ]; then
             'simulation-distance=6' \
             'spawn-protection=0' \
             'max-players=20' \
-            "motd=test local - $SERVER_NAME"
+            "motd=./plugin/scripts/test-local.sh - $SERVER_NAME"
     } >"$TEST_DIR/server.properties"
 fi
 

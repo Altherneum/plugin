@@ -55,6 +55,7 @@
 | curl, unzip | téléchargement de Paper, extraction des cartes |
 
 ## Lancement
+Déplacez vous dans le repo du plugin (exemple `cd ~/repo/plugin`)
 ```sh
 ./scripts/test-local.sh # skyblock par défaut
 ./scripts/test-local.sh --server hub # hub
