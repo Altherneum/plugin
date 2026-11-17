@@ -65,8 +65,9 @@
 ./scripts/test-local.sh --help
 ```
 
-Le premier lancement télécharge Paper 1.21.11 build 132 (~55 Mo) et le serveur
-démarre en une minute environ.
+Le premier lancement télécharge Paper (~55 Mo) et le serveur démarre en une
+minute environ. La version et le build de Paper sont lus dans le `.env` du
+dépôt `docker-server` (surchargables par `MC_VERSION` et `PAPER_BUILD`).
 
 Le type de serveur passe par la variable `SERVER_NAME` lue par le plugin
 (`ServerBootFile`) : le port ne sert qu'à se connecter, il n'influence pas le

@@ -27,10 +27,35 @@ REPO_DIR="$(dirname "$SCRIPT_DIR")"
 TEST_DIR="${TEST_DIR:-$HOME/mc-test}" # dossier de travail
 DOCKER_SERVER_DIR="${DOCKER_SERVER_DIR:-$HOME/repo/docker-server}" # config Paper + cartes
 DATA_DIR="${DATA_DIR:-$HOME/repo/server/Serveurs/DataFolder}" # anciennes données (structures, joueurs)
-MC_VERSION="${MC_VERSION:-1.21.11}" # version Paper (comme la prod)
-PAPER_BUILD="${PAPER_BUILD:-132}" # build Paper (comme la prod)
+# Valeurs Paper par défaut : celles du .env du dépôt docker-server
+env_value() {
+    [ -f "$DOCKER_SERVER_DIR/.env" ] || return 0
+    python3 - "$DOCKER_SERVER_DIR/.env" "$1" <<'PY'
+import sys
+
+path, key = sys.argv[1], sys.argv[2]
+for line in open(path, encoding="utf-8", errors="replace"):
+    line = line.strip()
+    if not line or line.startswith("#") or "=" not in line:
+        continue
+    name, value = line.split("=", 1)
+    if name.strip() != key:
+        continue
+    value = value.strip()
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in "'\"":
+        value = value[1:-1]
+    print(value)
+    break
+PY
+}
+MC_VERSION="${MC_VERSION:-$(env_value PAPER_VERSION)}" # version Paper (comme la prod)
+MC_VERSION="${MC_VERSION:-1.21.11}"
+PAPER_BUILD="${PAPER_BUILD:-$(env_value PAPER_BUILD)}" # build Paper (comme la prod)
+PAPER_BUILD="${PAPER_BUILD:-132}"
 MEMORY="${MEMORY:-1G}" # tas Java du serveur de test
 SERVER_NAME="${SERVER_NAME:-skyblock}" # hub, skyblock, survie...
+DOMAIN_NAME="${DOMAIN_NAME:-localhost}" # affiché par le plugin (tab, boss bar, MOTD)
+TLD="${TLD:-}" # vide en local, ".fr" en prod
 MC_PORT="${MC_PORT:-25565}"
 RCON_PORT="${RCON_PORT:-}" # défaut : MC_PORT + 10
 CONTAINER="${CONTAINER:-}"
