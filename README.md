@@ -41,6 +41,80 @@
 # plugin
 - Server side plugin with Spigot / PaperMC & Javacord
 
+# Tester en local
+- Script : [`scripts/test-local.sh`](scripts/test-local.sh)
+- Compile le plugin et lance un serveur Paper hors-ligne dans `~/mc-test`, sans toucher à la production
+- N'importe quel type de serveur : hub, skyblock, survie, creatif, anarchie, rpg, opprison, test
+
+## Prérequis
+| Outil | Utilité |
+|---|---|
+| Docker | exécution du serveur Paper |
+| Maven + JDK 21 | compilation du plugin |
+| Python 3 | récupération de l'URL Paper et adaptation de `paper-global.yml` |
+| curl, unzip | téléchargement de Paper, extraction des cartes |
+
+## Lancement
+```sh
+./scripts/test-local.sh # skyblock par défaut
+./scripts/test-local.sh --server hub # hub
+./scripts/test-local.sh --server survie --port 25566
+./scripts/test-local.sh --no-run # prépare seulement
+./scripts/test-local.sh --fresh # repart de zéro (mondes supprimés)
+./scripts/test-local.sh --no-build # relance sans recompiler
+./scripts/test-local.sh --help
+```
+
+Le premier lancement télécharge Paper 1.21.11 build 132 (~55 Mo) et le serveur
+démarre en une minute environ.
+
+Le type de serveur passe par la variable `SERVER_NAME` lue par le plugin
+(`ServerBootFile`) : le port ne sert qu'à se connecter, il n'influence pas le
+type. Un dossier de test = un type : pour changer de type, relancer avec
+`--fresh` ou choisir un autre dossier (`--dir ~/mc-test-hub`).
+
+## Cartes et structures
+| Type | Carte `Spawn` | Structure de spawn | Autres structures |
+|---|---|---|---|
+| `hub`, `creatif`, `rpg` | Hub (seulement `hub`) / monde généré sinon | `spawn` | — |
+| `skyblock` | SkyBlock | `spawn_SB` | `Island` (généré si absent) |
+| `survie` | Survie | `spawn_Survie` | — |
+| `anarchie`, `test` | Survie | `spawn_Survie` | — |
+| `opprison` | OPPrison | `spawn_OPPrison` | `mine` |
+
+Les cartes viennent de `docker-server` (`stacks/minecraft/paper/maps`), les
+structures de `~/repo/server/Serveurs/DataFolder/structures` (toutes copiées :
+elles ne sont chargées que si le type de serveur en a besoin).
+
+## En jeu
+- Connexion directe à `localhost:25565` (serveur hors-ligne : n'importe quel pseudo)
+- `skyblock` : `/island` crée une île, sans droit administrateur
+- Commandes admin : `op <pseudo>` dans la console, puis `tag <pseudo> ADD Admin`
+- RCON : port + 10 (`25575` par défaut), mot de passe `test`
+
+## Options
+| Option | Effet |
+|---|---|
+| `--server TYPE` | type de serveur (défaut : `skyblock`) |
+| `--fresh` | supprime le dossier de test avant de recommencer |
+| `--no-build` | ne recompile pas (utilise `target/plugin-1.0-fat.jar`) |
+| `--no-run` | prépare seulement, sans lancer Docker |
+| `--port N` | port du serveur (défaut : `25565`), RCON = port + 10 |
+| `--rcon-port N` | port RCON explicite |
+| `--memory TAILLE` | tas Java (défaut : `1G`) |
+| `--cpus N` | limite de CPU du conteneur |
+| `--dir CHEMIN` | dossier de test (défaut : `~/mc-test`) |
+| `--data CHEMIN` | anciennes données du plugin (défaut : `~/repo/server/Serveurs/DataFolder`) |
+| `--with-data` | copie aussi les anciennes données (joueurs, îles, argent) |
+
+Variables d'environnement équivalentes : `TEST_DIR`, `DOCKER_SERVER_DIR`,
+`DATA_DIR`, `MC_VERSION`, `PAPER_BUILD`, `MEMORY`, `SERVER_NAME`, `MC_PORT`,
+`RCON_PORT`, `CONTAINER`, `IMAGE`.
+
+Aucun push, aucune image publiée : le jar compilé est simplement copié dans le
+conteneur local, et les fichiers créés appartiennent à l'utilisateur courant
+(`--user` Docker).
+
 # Github
 - [Repository](https://github.com/Altherneum/plugin)
 - [Tableau](https://github.com/orgs/Altherneum/projects/3/)

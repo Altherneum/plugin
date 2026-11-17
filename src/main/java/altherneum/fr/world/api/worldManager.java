@@ -41,7 +41,6 @@ public class worldManager implements Listener {
         World world = worldCreator.createWorld();
         setWorldRules(world);
         TimeSync(world);
-        Bukkit.getServer().getWorlds().add(world);
         return world;
     }
 

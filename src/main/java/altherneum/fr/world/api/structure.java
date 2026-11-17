@@ -1,6 +1,7 @@
 package altherneum.fr.world.api;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class structure {
     public static void saveStructure(double x1, double x2, double y1, double y2, double z1, double z2, World world,
@@ -141,7 +143,8 @@ public class structure {
         setStructure(structureName, worldName, x, y, z, waitTime, 0, null);
     }
 
-    public static void setStructure(String structureName, String worldName, int x, int y, int z, int waitTime, int delay)
+    public static void setStructure(String structureName, String worldName, int x, int y, int z, int waitTime,
+            int delay)
             throws IOException, ParseException {
         setStructure(structureName, worldName, x, y, z, waitTime, delay, null);
     }
@@ -153,61 +156,157 @@ public class structure {
         Plugin plugin = JavaPlugin.getPlugin(main.class);
 
         File file = getDataStorage.structureFile(structureName);
-        if (file.exists()) {
+        if (!file.exists()) {
+            return;
+        }
 
-            if (player != null) {
-                if (player.isOnline()) {
-                    teleportation.Teleport(player, worldName, true,
-                            new Location(Bukkit.getWorld(worldName), 0.5, 85, -15.5, 0, 53));
-                    player.setGameMode(GameMode.SPECTATOR);
-                    player.setFlying(true);
+        World world = getOrCreateWorld(worldName);
+        FileConfiguration fileConfiguration = YamlConfiguration.loadConfiguration(file);
+        int blockCount = fileConfiguration.getInt("blockCount");
+        if (blockCount <= 0) {
+            return;
+        }
+
+        // Bornes des chunks couverts par la structure et par le point d'observation
+        int[] chunks = chunkBounds(fileConfiguration, blockCount, x, z);
+
+        // Un getBlockAt()/setBlockData() sur un chunk non chargé déclenche un
+        // chargement synchrone (syncLoad) : le thread principal attend alors la
+        // génération complète du chunk (biomes, structures, décorations) et le
+        // serveur se bloque plusieurs secondes. Les chunks sont donc préparés
+        // hors du thread principal puis maintenus chargés pendant la construction
+        // (setChunkForceLoaded déclenche lui aussi un chargement synchrone).
+        if (player != null && player.isOnline()) {
+            // Le joueur rejoint tout de suite l'île en spectateur pour regarder la
+            // construction : téléportation asynchrone, sans bloquer le thread principal
+            player.teleportAsync(new Location(world, 0.5, 85, -15.5, 0, 53)).thenRun(
+                    () -> Bukkit.getScheduler().runTask(plugin, () -> {
+                        try {
+                            teleportation.AfterTeleportation(player, worldName);
+                        } catch (IOException | ParseException e) {
+                            Bukkit.getLogger().warning("Structure " + structureName + " : téléportation impossible pour "
+                                    + worldName + " : " + e);
+                        }
+                        player.setGameMode(GameMode.SPECTATOR);
+                        player.setFlying(true);
+                    }));
+        }
+
+        prepareChunks(world, chunks, () -> Bukkit.getScheduler().runTask(plugin, () -> {
+            setChunksForceLoaded(world, chunks, true);
+            startStructurePlacement(plugin, structureName, worldName, world, fileConfiguration, blockCount, chunks,
+                    x, y, z, waitTime, delay, player);
+        }));
+    }
+
+    /**
+     * Bornes des chunks de la structure (index 0 et 1 : X, index 2 et 3 : Z).
+     * Le point d'observation (0.5, 85, -15.5) est inclus d'office.
+     */
+    private static int[] chunkBounds(FileConfiguration fileConfiguration, int blockCount, int x, int z) {
+        int minChunkX = 0;
+        int maxChunkX = 0;
+        int minChunkZ = -1;
+        int maxChunkZ = -1;
+
+        for (int index = 1; index <= blockCount; index++) {
+            int blockX = fileConfiguration.getInt(index + ".location.x") + x;
+            int blockZ = fileConfiguration.getInt(index + ".location.z") + z;
+            minChunkX = Math.min(minChunkX, blockX >> 4);
+            maxChunkX = Math.max(maxChunkX, blockX >> 4);
+            minChunkZ = Math.min(minChunkZ, blockZ >> 4);
+            maxChunkZ = Math.max(maxChunkZ, blockZ >> 4);
+        }
+
+        return new int[] { minChunkX, maxChunkX, minChunkZ, maxChunkZ };
+    }
+
+    private static void setChunksForceLoaded(World world, int[] chunks, boolean forceLoaded) {
+        for (int chunkX = chunks[0]; chunkX <= chunks[1]; chunkX++) {
+            for (int chunkZ = chunks[2]; chunkZ <= chunks[3]; chunkZ++) {
+                world.setChunkForceLoaded(chunkX, chunkZ, forceLoaded);
+            }
+        }
+    }
+
+    /**
+     * Charge les chunks de façon asynchrone puis exécute l'action, qui repasse
+     * sur le thread principal.
+     */
+    private static void prepareChunks(World world, int[] chunks, Runnable action) {
+        List<CompletableFuture<Chunk>> futures = new ArrayList<>();
+        for (int chunkX = chunks[0]; chunkX <= chunks[1]; chunkX++) {
+            for (int chunkZ = chunks[2]; chunkZ <= chunks[3]; chunkZ++) {
+                futures.add(world.getChunkAtAsync(chunkX, chunkZ, true));
+            }
+        }
+
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                .thenRun(action)
+                .exceptionally(throwable -> {
+                    Bukkit.getLogger().warning("Structure : chargement des chunks impossible pour le monde "
+                            + world.getName() + " : " + throwable);
+                    return null;
+                });
+    }
+
+    private static void startStructurePlacement(Plugin plugin, String structureName, String worldName, World world,
+            FileConfiguration fileConfiguration, int blockCount, int[] chunks, int x, int y, int z, int waitTime,
+            int delay, Player player) {
+        new BukkitRunnable() {
+
+            int counter = 1;
+            int counter2 = blockCount;
+
+            @Override
+            public void run() {
+                try {
+                    if (counter > counter2) {
+                        if (player != null) {
+                            if (player.isOnline()) {
+                                teleportation.Teleport(player, worldName, false);
+                            }
+                        }
+
+                        setChunksForceLoaded(world, chunks, false);
+                        cancel();
+                        return;
+                    }
+
+                    placeBlock(world, fileConfiguration, counter, x, y, z);
+                    placeBlock(world, fileConfiguration, counter2, x, y, z);
+
+                    counter++;
+                    counter2--;
+                } catch (Exception e) {
+                    // Avant : exception ignorée, le même bloc était réessayé
+                    // à chaque tick et la construction ne finissait jamais
+                    Bukkit.getLogger().warning("Structure " + structureName + " interrompue sur le monde "
+                            + worldName + " : " + e);
+                    e.printStackTrace();
+                    setChunksForceLoaded(world, chunks, false);
+                    cancel();
                 }
             }
+        }.runTaskTimer(plugin, delay, waitTime);
+    }
 
-            new BukkitRunnable() {
-
-                int counter = 1;
-                World world = worldManager.Generate(worldName, false, World.Environment.NORMAL, WorldType.NORMAL, true);
-                FileConfiguration fileConfiguration = YamlConfiguration.loadConfiguration(file);
-                int blockCount = fileConfiguration.getInt("blockCount");
-                int counter2 = blockCount;
-
-                @Override
-                public void run() {
-                    try {
-                        Block block = world.getBlockAt(fileConfiguration.getInt(counter + ".location.x") + x,
-                                fileConfiguration.getInt(counter + ".location.y") + y,
-                                fileConfiguration.getInt(counter + ".location.z") + z);
-                        block.setType(Material.valueOf(fileConfiguration.getString(counter + ".type")));
-                        block.setBlockData(
-                                Bukkit.getServer().createBlockData(fileConfiguration.getString(counter + ".data")));
-                        setCustomBlock(block);
-
-                        Block block2 = world.getBlockAt(fileConfiguration.getInt(counter2 + ".location.x") + x,
-                                fileConfiguration.getInt(counter2 + ".location.y") + y,
-                                fileConfiguration.getInt(counter2 + ".location.z") + z);
-                        block2.setType(Material.valueOf(fileConfiguration.getString(counter2 + ".type")));
-                        block2.setBlockData(
-                                Bukkit.getServer().createBlockData(fileConfiguration.getString(counter2 + ".data")));
-                        setCustomBlock(block2);
-
-                        if (counter > counter2) {
-                            if (player != null) {
-                                if (player.isOnline()) {
-                                    teleportation.Teleport(player, worldName, false);
-                                }
-                            }
-
-                            cancel();
-                        }
-                        counter++;
-                        counter2--;
-
-                    } catch (Exception e) {
-                    }
-                }
-            }.runTaskTimer(plugin, delay, waitTime);
+    private static World getOrCreateWorld(String worldName) {
+        World world = Bukkit.getWorld(worldName);
+        if (world == null) {
+            world = worldManager.Generate(worldName, false, World.Environment.NORMAL, WorldType.NORMAL, true);
         }
+        return world;
+    }
+
+    private static void placeBlock(World world, FileConfiguration fileConfiguration, int index, int x, int y, int z) {
+        Block block = world.getBlockAt(fileConfiguration.getInt(index + ".location.x") + x,
+                fileConfiguration.getInt(index + ".location.y") + y,
+                fileConfiguration.getInt(index + ".location.z") + z);
+        // setBlockData pose le type et l'état en une seule fois, sans physique
+        // (pas de mise à jour des voisins ni de chute des blocs pendant la copie)
+        block.setBlockData(Bukkit.createBlockData(fileConfiguration.getString(index + ".data")), false);
+        setCustomBlock(block);
     }
 
     public static List<String> Structures() {
