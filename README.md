@@ -91,6 +91,10 @@ elles ne sont chargées que si le type de serveur en a besoin).
 - `skyblock` : `/island` crée une île, sans droit administrateur
 - Commandes admin : `op <pseudo>` dans la console, puis `tag <pseudo> ADD Admin`
 - RCON : port + 10 (`25575` par défaut), mot de passe `test`
+- Le domaine affiché (tab, boss bar, MOTD) vient de `DOMAIN_NAME` + `TLD` : par défaut `localhost` sans TLD, donc `SkyBlock.localhost` ; pour simuler un domaine :
+  ```sh
+  DOMAIN_NAME=example TLD=.test ./scripts/test-local.sh
+  ```
 
 ## Options
 | Option | Effet |
@@ -108,8 +112,8 @@ elles ne sont chargées que si le type de serveur en a besoin).
 | `--with-data` | copie aussi les anciennes données (joueurs, îles, argent) |
 
 Variables d'environnement équivalentes : `TEST_DIR`, `DOCKER_SERVER_DIR`,
-`DATA_DIR`, `MC_VERSION`, `PAPER_BUILD`, `MEMORY`, `SERVER_NAME`, `MC_PORT`,
-`RCON_PORT`, `CONTAINER`, `IMAGE`.
+`DATA_DIR`, `MC_VERSION`, `PAPER_BUILD`, `MEMORY`, `SERVER_NAME`, `DOMAIN_NAME`,
+`TLD`, `MC_PORT`, `RCON_PORT`, `CONTAINER`, `IMAGE`.
 
 Aucun push, aucune image publiée : le jar compilé est simplement copié dans le
 conteneur local, et les fichiers créés appartiennent à l'utilisateur courant

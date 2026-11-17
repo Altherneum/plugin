@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import altherneum.fr.main.main;
+import altherneum.fr.text.textTranslation;
 
 public class BossBarMessage implements Listener {
     private static final JavaPlugin plugin = main.getPlugin(main.class);
@@ -76,7 +77,7 @@ public class BossBarMessage implements Listener {
                         else {
                             bossBar = Bukkit.createBossBar(
                                     key,
-                                    "§4§l" + ServerBootFile.getServerType() + "§7.§fAltherneum§7.§ffr",
+                                    "§4§l" + ServerBootFile.getServerType() + "§7.§f" + textTranslation.ServerName() + textTranslation.ServerTLD(),
                                     BarColor.WHITE,
                                     BarStyle.SOLID);
                         }

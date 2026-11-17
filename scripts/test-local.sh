@@ -64,8 +64,7 @@ Usage : scripts/test-local.sh [options]
 Le type de serveur passe par la variable SERVER_NAME lue par le plugin :
 le port n'influence pas le type, il sert seulement à se connecter.
 
-Variables d'environnement : TEST_DIR, DOCKER_SERVER_DIR, DATA_DIR, MC_VERSION,
-PAPER_BUILD, MEMORY, SERVER_NAME, MC_PORT, RCON_PORT, CONTAINER, IMAGE
+Variables d'environnement : TEST_DIR, DOCKER_SERVER_DIR, DATA_DIR, MC_VERSION, PAPER_BUILD, MEMORY, SERVER_NAME, DOMAIN_NAME, TLD, MC_PORT, RCON_PORT, CONTAINER, IMAGE
 EOF
 }
 
@@ -342,8 +341,8 @@ exec docker run --rm -i "${extra_args[@]}" \
     -v "${TEST_DIR}:/data" \
     -v "${TEST_DIR}/DataFolder:/DataFolder" \
     -e SERVER_NAME="$SERVER_NAME" \
-    -e DOMAIN_NAME=example \
-    -e TLD=.test \
+    -e DOMAIN_NAME="$DOMAIN_NAME" \
+    -e TLD="$TLD" \
     -e DISCORD_BOT_TOKEN= \
     "$IMAGE" \
     sh -c "cd /data && exec java -Xms${MEMORY} -Xmx${MEMORY} -jar paper.jar --nogui"

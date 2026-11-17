@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import altherneum.fr.chat.prefixTag;
 import altherneum.fr.system.ServerBootFile;
+import altherneum.fr.text.textTranslation;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -49,7 +50,7 @@ public class eventsMinecraft implements Listener {
         String playerName = prefixTag.prefixTagDiscord(e.getPlayer()) + e.getPlayer().getName();
         ArrayList<String> messages = new ArrayList<>();
         messages.add("```");
-        messages.add("✋ Connecté à " + ServerBootFile.getServerType() + ".altherneum.fr");
+        messages.add("✋ Connecté à " + ServerBootFile.getServerType() + "." + textTranslation.ServerName() + textTranslation.ServerTLD());
         messages.add(playerName);
         messages.add("```");
         altherneum.fr.discord.messages.SendMessageToChannel(messages);
@@ -61,7 +62,7 @@ public class eventsMinecraft implements Listener {
         String playerName = prefixTag.prefixTagDiscord(e.getPlayer()) + e.getPlayer().getName();
         ArrayList<String> messages = new ArrayList<>();
         messages.add("```");
-        messages.add("⛔ Déconnecté de " + ServerBootFile.getServerType() + ".altherneum.fr");
+        messages.add("⛔ Déconnecté de " + ServerBootFile.getServerType() + "." + textTranslation.ServerName() + textTranslation.ServerTLD());
         messages.add(playerName);
         messages.add("```");
         altherneum.fr.discord.messages.SendMessageToChannel(messages);

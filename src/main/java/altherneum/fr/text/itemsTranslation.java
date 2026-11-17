@@ -770,7 +770,7 @@ public class itemsTranslation {
         switch (languages) {
             case fr:
             case en:
-                return "§6§lPLAY.altherneum.fr";
+                return "§6§lPLAY." + textTranslation.ServerName() + textTranslation.ServerTLD();
             default:
                 return "";
         }

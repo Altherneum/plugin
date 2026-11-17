@@ -96,7 +96,7 @@ public class Tab {
     public static String header(Player player) {
         String header = "";
         header += "\n\n\n\n";
-        header += "§6[ §4§l" + ServerBootFile.getServerType().toString() + ".§2altherneum§6.fr ]\n";
+        header += "§6[ §4§l" + ServerBootFile.getServerType().toString() + ".§2" + textTranslation.ServerName() + "§6" + textTranslation.ServerTLD() + " ]\n";
         header += textTranslation.DiscordNoNewLine() + "\n\n";
         header += Bukkit.getServer().getOnlinePlayers().size() + " §6/§r " + Bukkit.getServer().getMaxPlayers();
         header += "\n§6Ping §r: §6" + player.getPing() + " §rMs";
