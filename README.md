@@ -93,6 +93,7 @@ elles ne sont chargées que si le type de serveur en a besoin).
 - `skyblock` : `/island` crée une île, sans droit administrateur
 - Commandes admin : `op <pseudo>` dans la console, puis `tag <pseudo> ADD Admin`
 - RCON : port + 10 (`25575` par défaut), mot de passe `test`
+- Le tab affiche `Plugin : <version> (<date de compilation>)` : utile pour vérifier quel jar tourne (local comme prod)
 - Le domaine affiché (tab, boss bar, MOTD) vient de `DOMAIN_NAME` + `TLD` : par défaut `localhost` sans TLD, donc `SkyBlock.localhost` ; pour simuler un domaine :
   ```sh
   DOMAIN_NAME=example TLD=.test ./scripts/test-local.sh

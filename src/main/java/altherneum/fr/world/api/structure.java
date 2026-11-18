@@ -157,15 +157,26 @@ public class structure {
 
         File file = getDataStorage.structureFile(structureName);
         if (!file.exists()) {
+            // Visible dans la console : c'est souvent le volume de données qui
+            // n'a pas été rempli (fichier présent sur l'ancien serveur seulement)
+            Bukkit.getLogger().warning("Structure " + structureName + " introuvable : " + file.getAbsolutePath());
             return;
         }
 
         World world = getOrCreateWorld(worldName);
+        if (world == null) {
+            Bukkit.getLogger().warning("Structure " + structureName + " : monde " + worldName + " introuvable");
+            return;
+        }
+
         FileConfiguration fileConfiguration = YamlConfiguration.loadConfiguration(file);
         int blockCount = fileConfiguration.getInt("blockCount");
         if (blockCount <= 0) {
+            Bukkit.getLogger().warning("Structure " + structureName + " vide ou invalide : " + file.getAbsolutePath());
             return;
         }
+
+        Bukkit.getLogger().info("Structure " + structureName + " : " + blockCount + " blocs dans " + worldName);
 
         // Bornes des chunks couverts par la structure et par le point d'observation
         int[] chunks = chunkBounds(fileConfiguration, blockCount, x, z);

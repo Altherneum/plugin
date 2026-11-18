@@ -100,8 +100,33 @@ public class Tab {
         header += textTranslation.DiscordNoNewLine() + "\n\n";
         header += Bukkit.getServer().getOnlinePlayers().size() + " §6/§r " + Bukkit.getServer().getMaxPlayers();
         header += "\n§6Ping §r: §6" + player.getPing() + " §rMs";
+        header += "§7Plugin §r: v°§6" + pluginVersion() + "\n";
         return header;
     }
+
+    /**
+     * Version du plugin et horodatage de compilation, lus dans le manifest du jar.
+     * Permet de vérifier en jeu quel build est réellement déployé.
+     */
+    public static String pluginVersion() {
+        if (cachedPluginVersion == null) {
+            String version = JavaPlugin.getPlugin(main.class).getDescription().getVersion();
+            try (java.io.InputStream stream = Tab.class.getResourceAsStream("/META-INF/MANIFEST.MF")) {
+                if (stream != null) {
+                    String build = new java.util.jar.Manifest(stream).getMainAttributes().getValue("Build-Time");
+                    if (build != null && !build.isBlank()) {
+                        version = version + " §8(" + build + ")";
+                    }
+                }
+            } catch (Exception ignored) {
+                // pas de manifest (exécution depuis les classes compilées)
+            }
+            cachedPluginVersion = version;
+        }
+        return cachedPluginVersion;
+    }
+
+    private static String cachedPluginVersion;
 
     public static String footer(long maxMemory, long usedMemory, long allocatedMemory, long freeMemory, double cpuusage,
             long free, long total, boolean isPinged, long currentTime) {
