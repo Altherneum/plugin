@@ -100,7 +100,6 @@ public class Tab {
         header += textTranslation.DiscordNoNewLine() + "\n\n";
         header += Bukkit.getServer().getOnlinePlayers().size() + " §6/§r " + Bukkit.getServer().getMaxPlayers();
         header += "\n§6Ping §r: §6" + player.getPing() + " §rMs";
-        header += "§7Plugin §r: v°§6" + pluginVersion() + "\n";
         return header;
     }
 
@@ -143,6 +142,8 @@ public class Tab {
         } else {
             footer += "\n§6Ping §r: google.fr : §4§lErreur";
         }
+
+        footer += "\n\n§7Plugin §r: v°§6" + pluginVersion() + "\n";
 
         return footer;
     }
