@@ -24,7 +24,8 @@ jobs:
         cache: maven
 
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      # Le numéro de release est aussi le tag v.<numéro> créé plus bas
+      run: mvn -B package --file pom.xml -Dbuild.version=${{ github.run_number }}
 
     - run: mkdir artifact && cp target/*.jar artifact
 

@@ -110,15 +110,22 @@ public class Tab {
     public static String pluginVersion() {
         if (cachedPluginVersion == null) {
             String version = JavaPlugin.getPlugin(main.class).getDescription().getVersion();
+            String buildTime = null;
             try (java.io.InputStream stream = Tab.class.getResourceAsStream("/META-INF/MANIFEST.MF")) {
                 if (stream != null) {
-                    String build = new java.util.jar.Manifest(stream).getMainAttributes().getValue("Build-Time");
-                    if (build != null && !build.isBlank()) {
-                        version = version + " §8(" + build + ")";
+                    java.util.jar.Attributes attributes = new java.util.jar.Manifest(stream).getMainAttributes();
+                    // Numéro de release injecté par la CI (-Dbuild.version=<run_number>)
+                    String buildVersion = attributes.getValue("Build-Version");
+                    if (buildVersion != null && !buildVersion.isBlank()) {
+                        version = buildVersion;
                     }
+                    buildTime = attributes.getValue("Build-Time");
                 }
             } catch (Exception ignored) {
                 // pas de manifest (exécution depuis les classes compilées)
+            }
+            if (buildTime != null && !buildTime.isBlank()) {
+                version = version + " §8(" + buildTime + ")";
             }
             cachedPluginVersion = version;
         }

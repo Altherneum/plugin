@@ -36,20 +36,22 @@ jobs:
         curl -fsSL https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /opt/maven --strip-components=1
         ln -s $MAVEN_HOME/bin/mvn /usr/local/bin/mvn
 
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
-
-    - name: Artifacts generation
-      run: |
-        mkdir -p dist/release
-        cp target/*.jar dist/release
-
     - name: Generate Tag
       id: tag
       run: |
         TAG="v$(date +'%d-%m-%Y_%H-%M-%S')"
         echo "tag=$TAG" >> $GITHUB_OUTPUT
+        echo "tag_short=${TAG#v}" >> $GITHUB_OUTPUT
         echo "Tag : $TAG"
+
+    - name: Build with Maven
+      # Le numéro de version embarqué est celui du tag de release Forgejo
+      run: mvn -B package --file pom.xml -Dbuild.version=${{ steps.tag.outputs.tag_short }}
+
+    - name: Artifacts generation
+      run: |
+        mkdir -p dist/release
+        cp target/*.jar dist/release
 
     - name: Forgejo release
       uses: actions/forgejo-release@v2.7.3

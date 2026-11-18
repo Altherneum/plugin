@@ -14,6 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Horodatage de compilation affiché dans le tab (vérifier le déploiement) -->
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
+        <!-- Numéro de release : remplacé par la CI (-Dbuild.version=<run_number>) -->
+        <build.version>b1.0</build.version>
     </properties>
 
     <repositories>
@@ -55,6 +57,7 @@
                                 <Main-Class>altherneum.fr.main.main</Main-Class>
                                 <Implementation-Version>${project.version}</Implementation-Version>
                                 <Build-Time>${maven.build.timestamp}</Build-Time>
+                                <Build-Version>${build.version}</Build-Version>
                             </manifestEntries>
                         </transformer>
                     </transformers>
