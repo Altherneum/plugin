@@ -125,7 +125,7 @@ public class Tab {
                 // pas de manifest (exécution depuis les classes compilées)
             }
             if (buildTime != null && !buildTime.isBlank()) {
-                version = version + " §8(" + buildTime + ")";
+                version = version + "\n§8(" + buildTime + ")";
             }
             cachedPluginVersion = version;
         }
